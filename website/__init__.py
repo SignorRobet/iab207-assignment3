@@ -4,30 +4,34 @@ from flask_bootstrap import Bootstrap5
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 
-import os
+# import os
 
 db = SQLAlchemy()
 
-# create a function that creates a web application
-# a web server will run this web application
-
 
 def create_app():
+    '''
+    Create Flask Web Application
+    '''
 
     app = Flask(__name__)  # this is the name of the module/package that is calling this app
     app.debug = True
     app.secret_key = 'utroutoru'
 
     # set the app configuration data
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sitedata.sqlite'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
     # app.config['SQLALCHEMY_DATABASE_URI']=os.environ['DATABASE_URL']
 
-    # initialize db with flask app
+    # initialise db with flask app and create tables
     db.init_app(app)
+    from .models import User, Event, Booking, Comment
+    db.create_all(app=app)
+
+    # db.session.add(User)
 
     bootstrap = Bootstrap5(app)
 
-    # initialize the login manager
+    # initialise the login manager
     login_manager = LoginManager()
 
     # set the name of the login function that lets user login
@@ -36,7 +40,7 @@ def create_app():
     login_manager.init_app(app)
 
     # create a user loader function takes userid and returns User
-    # from .models import User  # importing here to avoid circular references
+    from .models import User  # importing here to avoid circular references
     # @login_manager.user_loader
     # def load_user(user_id):
     #    return User.query.get(int(user_id))

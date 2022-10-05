@@ -4,11 +4,13 @@
  Author:     Simon Di Florio
  Date:       05/10/2022
  
+ THIS FILE IS UNUSED
+ 
  This SQL file generates the PostgreSQL database for the application
  and clears the contents of every table.
  */
+;
 /* Create Database and connect to it */
-
 /* Users Table */
 CREATE TABLE IF NOT EXISTS Users (
     user_id SERIAL PRIMARY KEY,
