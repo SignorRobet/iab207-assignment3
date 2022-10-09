@@ -5,8 +5,12 @@
 #
 # This Python script defines each of the database classes.
 
+# README for constructor behaviour
+# https://stackoverflow.com/questions/20460339/flask-sqlalchemy-constructor
+
 import enum
 from . import db
+from flask_login import UserMixin
 
 
 class EventStatus(enum.Enum):
@@ -17,15 +21,18 @@ class EventStatus(enum.Enum):
     CANCELLED = 'Cancelled'
 
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     '''User Model'''
     __tablename__ = 'users'
     user_id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(100), unique=True, nullable=False)
-    password = db.Column(db.String(100), nullable=False)
 
+    user_name = db.Column(db.String(100), unique=True, nullable=False)
+    pw_hash = db.Column(db.String(200), nullable=False)
+
+    email = db.Column(db.String(100), unique=True, nullable=False)
     first_name = db.Column(db.String(100), nullable=False)
     last_name = db.Column(db.String(100), nullable=False)
+
     phone = db.Column(db.String(100), nullable=False)
     dob = db.Column(db.Date, nullable=False)
 
@@ -34,13 +41,11 @@ class User(db.Model):
     events = db.relationship('Event', backref='user', lazy=True)
     comments = db.relationship('Comment', backref='user', lazy=True)
 
-    def __init__(self, email, password, first_name, last_name, phone, dob):
-        self.email = email
-        self.password = password
-        self.first_name = first_name
-        self.last_name = last_name
-        self.phone = phone
-        self.dob = dob
+    def get_id(self):
+        '''
+        Override UserMixin get_id method to check user_id instead of id
+        '''
+        return str(self.user_id)
 
     def __repr__(self):
         return '<User {0}>'.format(self.email)
@@ -50,10 +55,11 @@ class Event(db.Model):
     '''Event Model'''
     __tablename__ = 'events'
     event_id = db.Column(db.Integer, primary_key=True)
+
+    title = db.Column(db.String(100), nullable=False)
     status = db.Column(db.Enum(EventStatus),
                        default=EventStatus.UNPUBLISHED,
                        nullable=False)
-    title = db.Column(db.String(100), nullable=False)
 
     image = db.Column(db.LargeBinary, nullable=False)
     description = db.Column(db.String(1000), nullable=False)
@@ -69,22 +75,6 @@ class Event(db.Model):
 
     # Foreign Keys
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-
-    def __init__(self, status, title,
-                 image, description, venue,
-                 time, capacity, ticket_price, user_id):
-        self.status = status
-        self.title = title
-
-        self.image = image
-        self.description = description
-        self.venue = venue
-
-        self.time = time
-        self.capacity = capacity
-        self.ticket_price = ticket_price
-
-        self.user_id = user_id
 
     def __repr__(self):
         return '<Event {0}>'.format(self.title)
@@ -103,14 +93,6 @@ class Booking(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     event_id = db.Column(db.Integer, db.ForeignKey('events.event_id'), nullable=False)
 
-    def __init__(self, quantity, price, time, user_id, event_id):
-        self.quantity = quantity
-        self.price = price
-        self.time = time
-
-        self.user_id = user_id
-        self.event_id = event_id
-
     def __repr__(self):
         return '<Booking: {0}, Event: {1} User: {2}>'.format(
             self.booking_id, self.event_id, self.user_id)
@@ -127,13 +109,6 @@ class Comment(db.Model):
     # Foreign Keys
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     event_id = db.Column(db.Integer, db.ForeignKey('events.event_id'), nullable=False)
-
-    def __init__(self, text, time, user_id, event_id):
-        self.text = text
-        self.time = time
-
-        self.user_id = user_id
-        self.event_id = event_id
 
     def __repr__(self):
         return '<Comment: {0}, Event: {1} User: {2}>'.format(
