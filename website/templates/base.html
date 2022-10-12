@@ -17,8 +17,68 @@
 <body>
     <!-- Header -->
     <header>
-        <!-- Navbar -->
-        <nav>
+        <nav class="navbar navbar-expand navbar-dark bg-dark">
+            <!-- Concert Finder Logo -->
+            <a class="navbar-brand navbar_left" href="index.html">
+                <img class="img-fluid nav-logo" src="static/img/concert-finder-logo-white.png" alt="Concert Finder">
+            </a>
+
+            <!-- Centre-Aligned Buttons -->
+            <div class="container">
+                <div class="mx-auto" id="navbarSupportedContent">
+                    <ul class="navbar-nav mx-auto mb-lg-0 gap-2">
+
+                        <li class="nav-item nav-button">
+                            <a class="nav-link active btn btn-outline-primary nav-button_link" href="index.html"
+                                aria-current="page" title="Home" data-bs-toggle="tooltip" data-bs-placement="bottom">
+                                <i class="bi-house-fill nav-icon"></i>
+                            </a>
+                        </li>
+
+                        <li class="nav-item nav-button">
+                            <a class="nav-link btn btn-outline-primary nav-button_link" href="bookingHistory.html"
+                                aria-current="page" title="My Concerts" data-bs-toggle="tooltip"
+                                data-bs-placement="bottom">
+                                <i class="bi-calendar-week nav-icon"></i>
+                            </a>
+                        </li>
+
+                        <li class="nav-item nav-button">
+                            <a class="nav-link btn btn-outline-primary nav-button_link" href="concertCreation.html"
+                                aria-current="page" title="Create Concert" data-bs-toggle="tooltip"
+                                data-bs-placement="bottom">
+                                <i class="bi-plus-circle nav-icon"></i>
+                            </a>
+                        </li>
+
+                        <li class="nav-item nav-button">
+                            <a class="nav-link btn btn-outline-primary nav-button_link" href="nearbyEvents.html"
+                                aria-current="page" title="Nearby Events" data-bs-toggle="tooltip"
+                                data-bs-placement="bottom">
+                                <i class="bi-geo-alt nav-icon"></i>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Profile Picture -->
+            <div class="dropdown ms-auto navbar_right">
+                <a class="nav-link btn profile-btn" href="#" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <img class="dropdown rounded-circle ratio-1x1" src="static/img/profile_pic.jpg" alt="User Profile">
+                    <div class="profile-hover rounded-circle"></div>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Log Out</a></li>
+                </ul>
+            </div>
         </nav>
 
         {% block header %}
@@ -26,14 +86,73 @@
 
     </header>
 
+
     <main>
         {% block content %}
         {% endblock %}
     </main>
 
 
-    <footer class="footer">
-    </footer>
+    <footer>
+
+        <div class="row">
+            <div class="col mainFooterCSS">
+                <br>   
+                <h6>User </h6>
+                <a class="footerText" href="#">Login</a> <br>
+                <a class="footerText" href="#">Register</a> <br>
+                <a class="footerText" href="#">My Account</a> <br>
+                <a class="footerText" href="#">My Bookings</a> <br>
+            </div>
+            <div class="col mainFooterCSS">
+                <br>   
+                <h6>Events</h6>
+                <a class="footerText" href="#">All Events</a> <br>
+            </div>
+            <div class="col mainFooterCSS">
+                <br>   
+                <h6>Mosley Entertainment</h6>
+                <a class="footerText" href="#">About Us</a> <br>
+                <a class="footerText" href="#">Contact Us</a> <br>
+                <a class="footerText" href="#">FAQs</a> <br>
+            </div>
+            <div class="col mainFooterCSS">
+                <br>   
+                
+            <a href="#"><img class="sMedia" src="static/img/facebook.png" alt="Facebook"></a>
+            <a href="#"><img class="sMedia" src="static/img/instagram.png" alt="Instagram"></a>
+            <a href="#"><img class="sMedia" src="static/img/youtube.png" alt="Youtube"></a>
+            <a href="#"><img class="sMedia" src="static/img/twitter.png" alt="Twitter"></a>
+            <br>
+            <br>
+            <br>
+    
+        </div>
+    
+        <div class="row bottomFooterCSS">
+            <div class="col-md-3">
+                <select class="form-control form-control-sm">
+                    <option>English</option>
+                    <option>français</option>
+                    <option>日本語</option>
+                    <option>italiano</option>
+                    <option>中文</option>
+                    <option>Español</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <a class="footerText" href="#">Privacy Policy</a>
+            </div>
+            <div class="col-md-3">
+                <a class="footerText" href="#">Terms and Conditions</a>
+            </div>
+            <div class="col-md-3">
+                <p> © Mosley Entertainment. All rights reserved</p>
+            </div>
+        </div>
+    
+     </footer>
+
 
     <!-- Javascript -->
     <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>

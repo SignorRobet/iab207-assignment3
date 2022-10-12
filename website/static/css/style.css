@@ -6,3 +6,98 @@ Date:
 This is the main CSS file for the project 
 */
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
+
+/****************************************
+Navbar 
+*****************************************/
+
+.nav-button {
+    width: 16.5vw;
+
+    /* Max container width => 1320px/4 => 330px - padding */
+    max-width: 317px;
+}
+
+.nav-logo {
+    /* position: relative; */
+    width: 40px;
+    height: 40px;
+}
+
+.nav-icon {
+    font-size: 28px;
+}
+
+.profile-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.profile-btn:hover .profile-hover {
+    opacity: 0.5;
+}
+
+
+.navbar_left {
+    position: absolute;
+    left: 2%;
+}
+
+.navbar_right {
+    position: absolute;
+    right: 2%;
+}
+
+.nav-button_link {
+    border: none;
+}
+
+.nav-button_link:hover {
+    background-color: var(--thm-darkgrey);
+}
+
+.nav-button_link:focus {
+    border: none;
+}
+
+.nav-button_link.active {
+    border-bottom: 3px solid var(--thm-green);
+    background: none;
+    border-radius: 0px;
+}
+
+/****************************************
+Footer
+*****************************************/
+
+.mainFooterCSS {
+    background-color: rgb(142, 112, 240);
+    padding: 50px;
+}
+
+.bottomFooterCSS {
+    background-color: rgb(249, 139, 49);
+    padding: 50px;
+}
+
+.footerText {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.footerText:hover {
+    color: black;
+    text-decoration: underline;
+}
+
+.sMedia {
+    height: 40px;
+    width: 40px;
+}
