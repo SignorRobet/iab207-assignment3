@@ -28,13 +28,14 @@ class User(UserMixin, db.Model):
 
     user_name = db.Column(db.String(40), unique=True, nullable=False)
     pw_hash = db.Column(db.String(200), nullable=False)
-
     email = db.Column(db.String(100), unique=True, nullable=False)
+
+    image = db.Column(db.String(200), nullable=True)
     first_name = db.Column(db.String(100), nullable=False)
     last_name = db.Column(db.String(100), nullable=False)
 
-    phone = db.Column(db.String(100), nullable=False)
-    dob = db.Column(db.Date, nullable=False)
+    phone = db.Column(db.String(50), nullable=True)
+    dob = db.Column(db.Date, nullable=True)
 
     # Relationships
     bookings = db.relationship('Booking', backref='user', lazy=True)
@@ -55,7 +56,7 @@ class Event(db.Model):
                        default=EventStatus.UNPUBLISHED,
                        nullable=False)
 
-    image = db.Column(db.LargeBinary, nullable=False)
+    image = db.Column(db.String(200), nullable=False)
     description = db.Column(db.String(1000), nullable=False)
     venue = db.Column(db.String(100), nullable=False)
 
