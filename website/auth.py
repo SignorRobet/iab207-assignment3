@@ -5,6 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from .models import User
 from .forms import LoginForm, RegisterForm
 from flask_login import login_user, login_required, logout_user
+from .functions import check_upload_file
 from . import db
 
 
@@ -13,7 +14,7 @@ bp = Blueprint('auth', __name__)
 
 
 @bp.route('/login', methods=['GET', 'POST'])
-def authenticate():  # view function
+def login():  # view function
     '''
     Login view function
     '''
@@ -37,7 +38,7 @@ def authenticate():  # view function
         else:
             flash(error)
 
-    return render_template('user.html', form=login_form, heading='Login')
+    return render_template('user.html', form=login_form, heading='Login', title='Login')
 
 
 @bp.route('/register', methods=['GET', 'POST'])
@@ -56,6 +57,7 @@ def register():
         last_name = register_form.last_name.data
         phone = register_form.phone.data
         dob = register_form.dob.data
+        img_file_path = check_upload_file(register_form.image.data, 'users')
 
         # Check if user or email already taken
         u1 = User.query.filter_by(user_name=user_name).first()
@@ -70,18 +72,21 @@ def register():
             u1 = User(
                 user_name=user_name, pw_hash=generate_password_hash(password),
                 email=email, first_name=first_name, last_name=last_name,
-                phone=phone, dob=dob)
+                phone=phone, dob=dob, image=img_file_path)
             db.session.add(u1)
             db.session.commit()
-            return redirect(url_for('auth.authenticate'))
+            return redirect(url_for('auth.login'))
         else:
             flash(error)
 
-    return render_template('user.html', form=register_form, heading='Register')
+    return render_template('user.html', form=register_form, heading='Register', title='Register')
 
 
 @bp.route('/logout', methods=['GET'])
 @login_required
 def logout():
+    '''
+    Logout User
+    '''
     logout_user()
-    return redirect(url_for('index'))
+    return redirect(url_for('main.index'))

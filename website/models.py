@@ -24,44 +24,39 @@ class EventStatus(enum.Enum):
 class User(UserMixin, db.Model):
     '''User Model'''
     __tablename__ = 'users'
-    user_id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
 
-    user_name = db.Column(db.String(100), unique=True, nullable=False)
+    user_name = db.Column(db.String(40), unique=True, nullable=False)
     pw_hash = db.Column(db.String(200), nullable=False)
-
     email = db.Column(db.String(100), unique=True, nullable=False)
+
+    image = db.Column(db.String(200), nullable=True)
     first_name = db.Column(db.String(100), nullable=False)
     last_name = db.Column(db.String(100), nullable=False)
 
-    phone = db.Column(db.String(100), nullable=False)
-    dob = db.Column(db.Date, nullable=False)
+    phone = db.Column(db.String(50), nullable=True)
+    dob = db.Column(db.Date, nullable=True)
 
     # Relationships
     bookings = db.relationship('Booking', backref='user', lazy=True)
     events = db.relationship('Event', backref='user', lazy=True)
     comments = db.relationship('Comment', backref='user', lazy=True)
 
-    def get_id(self):
-        '''
-        Override UserMixin get_id method to check user_id instead of id
-        '''
-        return str(self.user_id)
-
     def __repr__(self):
-        return '<User {0}>'.format(self.email)
+        return '<User {0}, username: {1}>'.format(self.id, self.user_name)
 
 
 class Event(db.Model):
     '''Event Model'''
     __tablename__ = 'events'
-    event_id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
 
     title = db.Column(db.String(100), nullable=False)
     status = db.Column(db.Enum(EventStatus),
                        default=EventStatus.UNPUBLISHED,
                        nullable=False)
 
-    image = db.Column(db.LargeBinary, nullable=False)
+    image = db.Column(db.String(200), nullable=False)
     description = db.Column(db.String(1000), nullable=False)
     venue = db.Column(db.String(100), nullable=False)
 
@@ -74,42 +69,42 @@ class Event(db.Model):
     bookings = db.relationship('Booking', backref='event', lazy=True)
 
     # Foreign Keys
-    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
     def __repr__(self):
-        return '<Event {0}>'.format(self.title)
+        return '<Event {0}, Title: {1}>'.format(self.id, self.title)
 
 
 class Booking(db.Model):
     '''Booking Model'''
     __tablename__ = 'bookings'
-    booking_id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
 
     quantity = db.Column(db.Integer, nullable=False)
     price = db.Column(db.Numeric(scale=2), nullable=False)
     time = db.Column(db.DateTime(timezone=False), nullable=False)
 
     # Foreign Keys
-    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    event_id = db.Column(db.Integer, db.ForeignKey('events.event_id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    event_id = db.Column(db.Integer, db.ForeignKey('events.id'), nullable=False)
 
     def __repr__(self):
-        return '<Booking: {0}, Event: {1} User: {2}>'.format(
-            self.booking_id, self.event_id, self.user_id)
+        return '<Booking: {0}, Event: {1}, User: {2}>'.format(
+            self.id, self.event_id, self.user_id)
 
 
 class Comment(db.Model):
     '''Comment Model'''
     __tablename__ = 'comments'
-    comment_id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
 
     text = db.Column(db.String(1000), nullable=False)
     time = db.Column(db.DateTime(timezone=False), nullable=False)
 
     # Foreign Keys
-    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    event_id = db.Column(db.Integer, db.ForeignKey('events.event_id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    event_id = db.Column(db.Integer, db.ForeignKey('events.id'), nullable=False)
 
     def __repr__(self):
         return '<Comment: {0}, Event: {1} User: {2}>'.format(
-            self.comment_id, self.event_id, self.user_id)
+            self.id, self.event_id, self.user_id)
