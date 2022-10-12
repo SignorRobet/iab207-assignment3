@@ -8,6 +8,47 @@ This is the main CSS file for the project
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
 
 /****************************************
+Global 
+*****************************************/
+
+.banner {
+    text-align: left;
+    width: 100%;
+    background-image: url("../img/AdobeStock_concertBanner.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: var(--thm-white);
+    height: 25vh;
+}
+
+.banner h1 {
+    font-size: 4rem;
+    margin: 0px;
+    font-family: var(--font-brand);
+}
+
+.banner h2 {
+    font-size: 3rem;
+    margin: 0px;
+    font-family: var(--font-brand);
+}
+
+:root {
+    --thm-white: #ebebeb;
+    --thm-black: #050202;
+    --thm-darkgrey: #1a1a1a;
+
+    --thm-lightred: #d81d2d;
+    --thm-red: #b61825;
+    --thm-darkred: #8a121c;
+
+    --thm-lightgreen: #17aa6d;
+    --thm-green: #138555;
+    --thm-darkgreen: #0f6642;
+
+    --font-brand: 'Bauhaus 93', sans-serif;
+}
+/****************************************
 Navbar 
 *****************************************/
 
@@ -71,6 +112,95 @@ Navbar
     background: none;
     border-radius: 0px;
 }
+
+/****************************************
+Index
+*****************************************/
+
+.cardCSS {
+
+    width:96%;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    position: relative;
+    border: 3px solid rgb(222, 222, 222);
+    box-shadow: 10px 10px 5px rgb(222, 222, 222);
+
+}
+
+.buttonCSS {
+
+    background-color: rgb(142, 112, 240);
+    color: black;
+    font-weight: bold;
+    border: rgb(142, 112, 240);
+    box-shadow: 5px 5px 5px rgb(222, 222, 222);
+}
+
+.buttonCSS:hover {
+    background-color: rgb(249, 139, 49);
+    color: white;
+    box-shadow: 0 0 rgb(222, 222, 222);
+}
+
+
+.buttonNoHover {
+    background-color: rgb(142, 112, 240);
+    color: black;
+    font-weight: bold;
+    border: rgb(142, 112, 240);
+    box-shadow: 5px 5px 5px rgb(222, 222, 222);
+}
+
+.buttonNoHover:hover {
+    background-color: rgb(142, 112, 240);
+    color: black;
+    box-shadow: 5px 5px 5px rgb(222, 222, 222);
+}
+
+.cardCSS:hover {
+    box-shadow: 15px 15px 10px rgb(255, 216, 184);
+    width:100%;
+}
+
+.headingCSS {
+    text-align: center;
+    font-size: 8vw;
+    font-family: "Nabla", sans-serif;
+}
+
+.cardTitleCSS {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    color: black;
+    font-size: 20px;
+    font-weight:100;
+    background: white;
+    border-radius: 5px;
+    border: 1px solid;
+    padding: 5px 5px;
+}
+
+.dateCSS {
+    border: 5px solid;
+    font-size: 16px;
+    font-weight:100;
+    background: rgb(234, 234, 234);
+    border-radius: 5px;
+    padding: 5px 5px;
+    text-align: center;
+    border: 0px 
+}
+/* .subHeadingsCSS {
+    text-indent: 30px;
+    font-size: 4vw;
+    font-family: Arial, sans-serif;
+    font-weight: bolder;
+    color: rgb(63, 63, 63);
+    background: linear-gradient(to right, rgb(142, 112, 240) 0%, rgb(231, 245, 243));
+    border-radius: 5px;
+    margin: 20px; */
 
 /****************************************
 Footer
