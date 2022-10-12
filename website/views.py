@@ -5,9 +5,9 @@ bp = Blueprint('main', __name__)
 
 @bp.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', title='Home')
+
 
 @bp.route('/searchresults')
 def searchresults():
-    return render_template('searchresults.html')
-
+    return render_template('searchresults.html', title='Search Results')
