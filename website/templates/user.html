@@ -1,12 +1,13 @@
-{% include "base.html" %}
+{% extends "base.html" %}
 {% from "bootstrap5/form.html" import render_form %}
-{% block body %}
 
+{% block header %}
 <div class="page-header">
     <h4>{{heading}}</h4>
 </div>
+{% endblock %}
 
-
+{% block content %}
 
 <div class="container-fluid">
     {% with messages = get_flashed_messages() %}
@@ -20,20 +21,17 @@
     {% endif %}
     {% endwith %}
 
+    <!-- Form rendering is simple and easy if using bootstrap -->
+    <div class="col-md-6">
+        {{render_form(form)}}
+    </div>
+
+    <!-- When you have login form, then do show the user a link to register -->
+    {% if heading|lower =='login' %}
+    <div class="col-md-4">
+        <p>New user? <a href="{{ url_for('auth.register') }}">Click here to register</a>.</p>
+    </div>
+    {% endif %}
 </div>
-
-
-
-<!-- Form rendering is simple and easy if using bootstrap -->
-<div class="col-md-6">
-    {{render_form(form)}}
-</div>
-
-<!-- When you have login form, then do show the user a link to register -->
-{% if heading|lower =='login' %}
-<div class="col-md-4">
-    <p>New user? <a href="{{ url_for('auth.register') }}">Click here to register</a>.</p>
-</div>
-{% endif %}
 
 {% endblock %}
