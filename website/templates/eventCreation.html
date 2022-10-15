@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name = "viewport" content = "width=device-width, initial-scale=1">
+     
+     <nav class="navbar sticky-top navbar-expand-lg navBar ">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="index.html">BizBookings.com</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="eventCreation.html">Create an Event</a>
+              </li>
+              
+              <li class="nav-item">
+                <a class="nav-link active" href="userBooking.html" tabindex="-1" aria-disabled="true">Booking History</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Browse by Category
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="eventDetails.html">Management and Leadership</a></li>
+                  <li><a class="dropdown-item" href="eventDetails.html">Financial Technolgies</a></li>
+                  <li><a class="dropdown-item" href="eventDetails.html">Emerging Industries</a></li>
+                  <li><a class="dropdown-item" href="eventDetails.html">etc.</a></li>
+                </ul>
+              </li>
+            </ul>
+            <form class="d-flex">
+              <input class="form-control-search me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-search" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+    <title>IAB207</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel = "stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="container">
+        <div class="my-3 p-3 createCSS">
+            <h1 class="class=border-bottom pb-2 mb-0 text-center">CREATE AN EVENT</h1>
+            
+            <div class="my-5 p-3 bg-body rounded shadow-sm">
+                <h3 class="class=border-bottom pb-2 mb-0">EVENT DETAILS</h3>
+                <form class="row g-3">
+                    <div class="col-md-4">
+                      <label for="inputEmail4" class="form-label">Stage Name</label>
+                      <input type="text" class="form-control" id="inputEmail4">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputPresentation" class="form-label">Name of Presentation</label>
+                        <input type="text" class="form-control" id="inputPresentation">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputCategory" class="form-label">Select Event Category</label>
+                        
+                        <select class="form-select" id = "inputCategory">
+                            <option selected>No Selection</option>
+                            <option value="1">Management/Leadership</option>
+                            <option value="2">Financial Technologies</option>
+                            <option value="3">Emerging Industries</option>
+                            <option value="4">Other</option>
+                            <option value="5">etc.</option>
+                        </select>
+                    </div>
+                    
+                    
+                    <div class="input-group">
+                        <span class="input-group-text">Duration of Event</span>
+                        <input type="text" aria-label="First name" class="form-control" placeholder="Hours">
+                        <input type="text" aria-label="Last name" class="form-control"  placeholder="Minutes">
+                    </div>
+
+                    <div class="col-12">
+                        <div class="input-group">
+                            <span class="input-group-text">Event Info</span>
+                            <textarea class="form-control" placeholder="Provide a brief description of what your event is about"></textarea>
+                          </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="input-group">
+                            <span class="input-group-text">Presenter Info</span>
+                            <textarea class="form-control" placeholder="Provide a brief introduction of yourself, your history or anything else your audience might like to know about you!"></textarea>
+                          </div>
+                    </div>
+                  </form>
+        </div>
+
+        <div class="my-5 p-3 bg-body rounded shadow-sm">
+            <h3 class="class=border-bottom pb-2 mb-0">Location Information</h3>
+            <form class="row g-3">
+                <div class="col-md-12">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">#</span>
+                        <input type="text" class="form-control" placeholder="Event ID - Your unique Event ID will verify dates and times to customise // All of your prearranged dates will display as additional boxes to edit below" aria-label="Event ID" aria-describedby="basic-addon1">
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2" >Check</button>
+                    </div>
+                </div>
+
+                <h4 class="text-center class=border-bottom pb-2 mb-0">Your Event is being hosted at: Lorem ipsum dolor</h4>
+
+                <div class = "row g-3">
+                    <div class="col-md-6">
+                        <label for="inputTime" class="form-label">Date(s)</label>
+                        <select id="inputTime" class="form-select">
+                        <option selected></option>
+                        <option>Available dates that have been confirmed with venue will be displayed here</option>
+                        <option>Available date 1</option>
+                        <option>Available date 2</option>
+                        <option>Available date 3</option>
+                        <option>...</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                    <label for="inputState" class="form-label">Time(s)</label>
+                    <select id="inputState" class="form-select">
+                        <option selected></option>
+                        <option>Select Time for Corresponding date</option>
+                        <option>Available Time 1</option>
+                        <option>Available Time 2</option>
+                        <option>Available Time 3</option>
+                        <option>...</option>
+                    </select>
+                    </div>
+                </div>
+
+                <div class = "row g-3">
+                    <div class="col-md-3 form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                        <label class="form-check-label" for="exampleRadios1">
+                          Tickets Available
+                        </label>
+                      </div>
+                      <div class=" col-md-3 form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                        <label class="form-check-label" for="exampleRadios2">
+                          Booked Out
+                        </label>
+                      </div>
+                      <div class="col-md-3 form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                        <label class="form-check-label" for="exampleRadios2">
+                          Cancelled
+                        </label>
+                      </div>
+                      <div class="col-md-3 form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                        <label class="form-check-label" for="exampleRadios2">
+                          Do not Show Yet
+                        </label>
+                      </div>
+
+                </div>
+                
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">#</span>
+                            <input type="text" class="form-control" placeholder="Number of Available Seats" aria-label="Event Seats" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">$</span>
+                            <input type="text" class="form-control" placeholder="Price per Seat" aria-label="Event Seat Price" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="my-5 p-3 bg-body rounded shadow-sm">
+            
+            <form class="row g-3">
+               
+                <div class="col-md-6">
+                    <h3 class="class=border-bottom pb-2 mb-0">Add a Cover Photo</h3>
+                    <div class="input-group mb-3">
+                        
+                        <input type="file" class="form-control" id="inputGroupFile02">
+                        <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                      </div>
+                </div>
+
+                
+                <div class="col-md-6">
+                    <h3 class="class=border-bottom pb-2 mb-0">Add a Presenter Photo</h3>
+                    <div class="input-group mb-3">
+                        
+                        <input type="file" class="form-control" id="inputGroupFile02">
+                        <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                      </div>
+                </div>
+
+                <div class="row g-3">
+                    <h3 class="class=border-bottom pb-2 mb-0">Add Other Media (Photos and Videos)</h3>
+                    <div class="input-group mb-3">
+                        
+                        <input type="file" class="form-control" id="inputGroupFile02">
+                        <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                      </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="my-5 p-3 bg-body rounded shadow-sm">
+            <h3 class="class=border-bottom pb-2 mb-0 text-center">Event Summary</h3>
+            <div class="row g-3">
+                <h4>Location: </h4>
+                <h4>Dates and Times:</h4>
+                <p>Date01/01/xx: Times:</p>
+                <p>Date02/01/xx: Times:</p>
+                <p>Date03/01/xx: Times:</p>
+                <h4>Available Seats:</h4>
+                <h4>Price per Seat</h4>
+                <h4>Potential Revenue from ticket sales: $0.0</h4>
+                
+                <a href = "eventDetails.html" class="btn">Preview Site</a>
+ 
+            </div>
+        </div>
+
+        <div class="my-5 p-3 bg-body rounded shadow-sm">
+            <h3 class="class=border-bottom pb-2 mb-0 text-center">Confirm Event</h3>
+
+            <div class="row">
+                <div class="col-md-12 text-center>
+                    <div class="form-check form-switch ">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">List on site?</label>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <button type="submit" class="btnSubmit">Create Event!</button>
+                </div>
+            </div>
+                
+
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+</body>
+
+<footer>
+
+</footer>
+
+</html>
