@@ -231,3 +231,17 @@ Footer
     height: 40px;
     width: 40px;
 }
+
+/****************************************
+Booking History
+*****************************************/
+
+.img-table {
+    width: 70px;
+    max-width: 70px;
+}
+
+.img-tablecell {
+    width: -moz-fit-content;
+    width: fit-content;
+}

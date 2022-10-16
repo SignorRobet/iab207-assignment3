@@ -11,3 +11,7 @@ def index():
 @bp.route('/searchresults')
 def searchresults():
     return render_template('searchresults.html', title='Search Results')
+
+@bp.route('/myevents')
+def myevents():
+    return render_template('myevents.html', title='My Events')

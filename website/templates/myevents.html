@@ -1,0 +1,248 @@
+{% extends "base.html" %}
+{% import "bootstrap/form.html" as wtf %}
+
+{% block content %}
+
+     <!-- Page Banner -->
+     <section class="banner d-flex">
+        <div class="container h-100 mt-3 mb-0">
+            <div class="row h-100 mb-0">
+                <div class="col-12 d-flex flex-column mb-0">
+                    <h2 class="mt-auto me-auto p-4 mb-0 bg-dark">My Events</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pb-md-3 pt-5">
+        <div class="container">
+            <form>
+                <div class="row">
+                    <div class="col-md-5 mt-auto">
+                        <div>
+                            <h1>My Hosted Events</h1>
+                            <label class="filter-label" for="search">Artist or Venue:</label>
+                            <input id="Search" type="text" class="form-control" title="Search
+                                placeholder=" Search by Artist or Venue" />
+
+                            <label class="filter-label" for="genre-select">Genre:</label>
+                            <select class="form-select" title="Genre Select" id="genre-select">
+                                <option selected value="all">--All Genres--</option>
+                                <option value="country">Country</option>
+                                <option value="electronic">Electronic</option>
+                                <option value="metal">Metal</option>
+                                <option value="rock">Rock</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5 mt-auto">
+                        <div>
+                            <label class="filter-label" for="status-select">Status:</label>
+                            <select class="form-select" title="Status Select" id="status-select">
+                                <option selected value="all">--All Statuses--</option>
+                                <option value="upcoming">Upcoming</option>
+                                <option value="inactive">Inactive</option>
+                                <option value="booked">Booked</option>
+                                <option value="cancelled">Cancelled</option>
+                            </select>
+
+                            <label class="filter-label" for="datePicker">Date: </label>
+                            <input id="datePicker" type="date" class="form-control" title="Date Picker" />
+                        </div>
+                    </div>
+
+                    <div class="col-auto mt-auto ms-auto">
+                        <div class="d-grid mx-auto py-3 py-md-0 mb-md-4">
+                            <button class="btn btn-danger btn-red" type="reset">
+                                Reset Filters
+                            </button>
+                        </div>
+                        <div class="d-grid mx-auto">
+                            <button class="btn btn-primary btn-green" type="submit">
+                                Apply Filters
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+
+   <!-- Index Table -->
+   <section class="pt-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive-md">
+                    <table class="table table-striped align-middle">
+                        <thead class="table-dark">
+                            <tr>
+                                <th class="" scope="col">Event ID</th>
+                                <th scope="col"></th>
+                                <th scope="col">Headline Artist</th>
+                                <th class="d-none d-sm-table-cell" scope="col">Venue</th>
+                                <th scope="col">Booking Date</th>
+                                <th class="text-center" scope="col">Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">0001</th>
+                                <td class="img-tablecell d-table-cell"><img class="img-fluid img-table"
+                                        src="static/img/AdobeStock_concertImage.jpeg" alt="Concert Image"></td>
+                                <td>Daryl Hall & John Oates</td>
+                                <td class="d-none d-sm-table-cell">Concert Hall</td>
+                                <td> 01/01/1970 </td>
+                                <td class="text-center">
+                                    <a href="concertDetails.html" class="btn btn-primary btn-green">
+                                        Edit Event
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">0002</th>
+                                <td class="img-tablecell d-table-cell"><img class="img-fluid img-table"
+                                        src="static/img/AdobeStock_concertImage.jpeg" alt="Concert Image"></td>
+                                <td>Dua Lipa</td>
+                                <td class="d-none d-sm-table-cell">Concert Hall</td>
+                                <td> 01/01/1970 </td>
+                                <td class="text-center">
+                                    <a href="concertDetails.html" class="btn btn-primary btn-green">
+                                        Edit Event
+                                    </a>
+                                </td>
+                            </tr>
+                           
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="pb-md-3 pt-5">
+    <div class="container">
+        <form>
+            <div class="row">
+                <div class="col-md-5 mt-auto">
+                    <div>
+                        <h1>My Booked Events</h1>
+                        <label class="filter-label" for="search">Artist or Venue:</label>
+                        <input id="Search" type="text" class="form-control" title="Search
+                            placeholder=" Search by Artist or Venue" />
+
+                        <label class="filter-label" for="genre-select">Genre:</label>
+                        <select class="form-select" title="Genre Select" id="genre-select">
+                            <option selected value="all">--All Genres--</option>
+                            <option value="country">Country</option>
+                            <option value="electronic">Electronic</option>
+                            <option value="metal">Metal</option>
+                            <option value="rock">Rock</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-5 mt-auto">
+                    <div>
+                        <label class="filter-label" for="status-select">Status:</label>
+                        <select class="form-select" title="Status Select" id="status-select">
+                            <option selected value="all">--All Statuses--</option>
+                            <option value="upcoming">Upcoming</option>
+                            <option value="inactive">Inactive</option>
+                            <option value="booked">Booked</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+
+                        <label class="filter-label" for="datePicker">Date: </label>
+                        <input id="datePicker" type="date" class="form-control" title="Date Picker" />
+                    </div>
+                </div>
+
+                <div class="col-auto mt-auto ms-auto">
+                    <div class="d-grid mx-auto py-3 py-md-0 mb-md-4">
+                        <button class="btn btn-danger btn-red" type="reset">
+                            Reset Filters
+                        </button>
+                    </div>
+                    <div class="d-grid mx-auto">
+                        <button class="btn btn-primary btn-green" type="submit">
+                            Apply Filters
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+
+<!-- Index Table -->
+<section class="pt-3">
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="table-responsive-md">
+                <table class="table table-striped align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="" scope="col">Order ID</th>
+                            <th scope="col"></th>
+                            <th scope="col">Headline Artist</th>
+                            <th class="d-none d-sm-table-cell" scope="col">Venue</th>
+                            <th scope="col">Booking Date</th>
+                            <th class="text-center" scope="col">Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       
+                        <tr>
+                            <th scope="row">0003</th>
+                            <td class="img-tablecell d-table-cell"><img class="img-fluid img-table"
+                                    src="static/img/AdobeStock_concertImage.jpeg" alt="Concert Image"></td>
+                            <td>Elton John</td>
+                            <td class="d-none d-sm-table-cell">Concert Hall</td>
+                            <td> 01/01/1970 </td>
+                            <td class="text-center">
+                                <a href="concertDetails.html" class="btn btn-primary btn-green">
+                                    View Details
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">0004</th>
+                            <td class="img-tablecell d-table-cell"><img class="img-fluid img-table"
+                                    src="static/img/AdobeStock_concertImage.jpeg" alt="Concert Image"></td>
+                            <td>Queen</td>
+                            <td class="d-none d-sm-table-cell">Concert Hall</td>
+                            <td> 01/01/1970 </td>
+                            <td class="text-center">
+                                <a href="concertDetails.html" class="btn btn-primary btn-green">
+                                    View Details
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">0005</th>
+                            <td class="img-tablecell d-table-cell"><img class="img-fluid img-table"
+                                    src="static/img/AdobeStock_concertImage.jpeg" alt="Concert Image"></td>
+                            <td>Bag Raiders</td>
+                            <td class="d-none d-sm-table-cell">Concert Hall</td>
+                            <td> 01/01/1970 </td>
+                            <td class="text-center">
+                                <a href="concertDetails.html" class="btn btn-primary btn-green">
+                                    View Details
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+{% endblock %}
