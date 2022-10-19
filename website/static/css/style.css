@@ -11,6 +11,36 @@ This is the main CSS file for the project
 Global 
 *****************************************/
 
+:root {
+    --thm-white: #ebebeb;
+    --thm-black: #050202;
+    --thm-darkgrey: #1a1a1a;
+
+    --thm-lightred: #d81d2d;
+    --thm-red: #b61825;
+    --thm-darkred: #8a121c;
+
+    --thm-lightgreen: #17aa6d;
+    --thm-green: #138555;
+    --thm-darkgreen: #0f6642;
+
+    --font-brand: 'Bauhaus 93', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+footer {
+    /* margin-top: auto; */
+}
+
 .banner {
     text-align: left;
     width: 100%;
@@ -33,21 +63,6 @@ Global
     font-family: var(--font-brand);
 }
 
-:root {
-    --thm-white: #ebebeb;
-    --thm-black: #050202;
-    --thm-darkgrey: #1a1a1a;
-
-    --thm-lightred: #d81d2d;
-    --thm-red: #b61825;
-    --thm-darkred: #8a121c;
-
-    --thm-lightgreen: #17aa6d;
-    --thm-green: #138555;
-    --thm-darkgreen: #0f6642;
-
-    --font-brand: 'Bauhaus 93', sans-serif;
-}
 /****************************************
 Navbar 
 *****************************************/
@@ -119,13 +134,14 @@ Index
 
 .cardCSS {
 
-    width:96%;
+    width:100%;
     font-family: Arial, sans-serif;
     font-size: 15px;
     position: relative;
-    border: 3px solid rgb(222, 222, 222);
+    /* border: 3px solid rgb(222, 222, 222); */
     box-shadow: 10px 10px 5px rgb(222, 222, 222);
 
+    transition : all 0.5s ease;
 }
 
 .buttonCSS {
@@ -160,7 +176,8 @@ Index
 
 .cardCSS:hover {
     box-shadow: 15px 15px 10px rgb(255, 216, 184);
-    width:100%;
+    /* border-color: var(--thm-red); */
+
 }
 
 .headingCSS {
