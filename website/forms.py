@@ -50,3 +50,15 @@ class RegisterForm(FlaskForm):
 
     # submit button
     submit = SubmitField("Register")
+
+
+class BookingForm(FlaskForm):
+    pass
+
+
+class CommentForm(FlaskForm):
+    pass
+
+
+class CreateEventForm(FlaskForm):
+    pass

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% from "bootstrap5/form.html" import render_form %}
+
+{% block header %}
+<div class="page-header">
+    <h4>{{heading}}</h4>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert" aria-label="close">x</button>
+        {{message}}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <!-- Form rendering is simple and easy if using bootstrap -->
+    <div class="row">
+        <div class="col-md-6">
+            <p>booking form</p>
+            {{render_form(booking_form)}}
+        </div>
+        <div class="col-md-6">
+            {% if current_user.is_authenticated %}
+            <p>comment form</p>
+            {{render_form(comment_form)}}
+            {% else %}
+            <p>Authenticate before commenting</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- When you have login form, then do show the user a link to register -->
+    {% if heading|lower =='login' %}
+    <div class="col-md-4">
+        <p>New user? <a href="{{ url_for('auth.register') }}">Click here to register</a>.</p>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}
