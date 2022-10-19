@@ -25,7 +25,10 @@
         <div class="card" style="width: 600px; margin-top: 5%; margin-bottom: 5%">
             <div class="card-body">
                 <div class="page-header">
-                    <h4 style="text-align: center;">{{heading}}</h4>
+                    <div style="text-align: center;">
+                        <img class="img-fluid nav-logo" src="/static/img/concert-finder-logo-white.png" alt="Concert Finder" style="background-color: black; height: 50px; width: auto; margin-left: auto; margin-right: auto; margin-bottom: 25px" >
+                    </div>
+                        <h4 style="text-align: center;">{{heading}}</h4>
                 </div>
                 {{render_form(form)}}
                 <!-- When you have login form, then do show the user a link to register -->
