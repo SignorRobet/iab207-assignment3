@@ -19,12 +19,16 @@ def create_app():
     app.debug = True
     app.secret_key = 'utroutoru'
 
+    # set TRACK_MODIFICATIONS to false to suppress start up warning
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     # set the app configuration data (postgres in Heroku, SQLite in local)
-    db_config = os.environ.get('DATABASE_URL', 'sqlite:///db.sqlite3')
-    print('[Init]: Database URI: {0}'.format(db_config))
-    app.config['SQLALCHEMY_DATABASE_URI'] = db_config
+    db_uri = os.environ.get('DATABASE_URL', 'sqlite:///db.sqlite3')
+    # Heroku sets uri with 'postgres://' but SQLAlchemy needs 'postgresql://' syntax
+    if db_uri.startswith("postgres://"):
+        db_uri = db_uri.replace("postgres://", "postgresql://", 1)
+    print('[Init]: Database URI: {0}'.format(db_uri))
+    app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
 
     # initialise db with flask app and create tables
     db.init_app(app)
