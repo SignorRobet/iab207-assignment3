@@ -4,7 +4,8 @@ from flask_bootstrap import Bootstrap5
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 
-# import os
+import os
+# from pathlib import Path
 
 db = SQLAlchemy()
 
@@ -18,12 +19,16 @@ def create_app():
     app.debug = True
     app.secret_key = 'utroutoru'
 
-    # set the app configuration data
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
-    # app.config['SQLALCHEMY_DATABASE_URI']=os.environ['DATABASE_URL']
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+    # set the app configuration data (postgres in Heroku, SQLite in local)
+    db_config = os.environ.get('DATABASE_URL', 'sqlite:///db.sqlite3')
+    print('[Init]: Database URI: {0}'.format(db_config))
+    app.config['SQLALCHEMY_DATABASE_URI'] = db_config
 
     # initialise db with flask app and create tables
     db.init_app(app)
+    # from .models import User  # always import for user_loader
     from .models import User, Event, Booking, Comment
     db.create_all(app=app)
 
@@ -40,8 +45,6 @@ def create_app():
     login_manager.init_app(app)
 
     # create a user loader function takes userid and returns User
-    from .models import User  # importing here to avoid circular references
-
     @login_manager.user_loader
     def load_user(user_id):
         return User.query.get(int(user_id))
