@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
 
     {% if title %}
-    <title>CF | {{title}}</title>
+    <title>CF | {{title}} | IAB207</title>
     {%else%}
-    <title>CF | IAB207</title>
+    <title>CF | Page | IAB207</title>
     {%endif%}
 </head>
 
@@ -105,9 +105,9 @@
         {% endblock %}
     </main>
 
-    <footer class="footer">
+    <footer>
 
-        <div class="row">
+        <div class="row mx-0">
             <div class="col mainFooterCSS">
                 <br>
                 <h6>User </h6>
@@ -140,28 +140,29 @@
                 <br>
 
             </div>
+        </div>
 
-            <div class="row bottomFooterCSS">
-                <div class="col-md-3">
-                    <select class="form-control form-control-sm">
-                        <option>English</option>
-                        <option>français</option>
-                        <option>日本語</option>
-                        <option>italiano</option>
-                        <option>中文</option>
-                        <option>Español</option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <a class="footerText" href="#">Privacy Policy</a>
-                </div>
-                <div class="col-md-3">
-                    <a class="footerText" href="#">Terms and Conditions</a>
-                </div>
-                <div class="col-md-3">
-                    <p> © Mosley Entertainment. All rights reserved</p>
-                </div>
+        <div class="row bottomFooterCSS mx-0">
+            <div class="col-md-3">
+                <select class="form-control form-control-sm">
+                    <option>English</option>
+                    <option>français</option>
+                    <option>日本語</option>
+                    <option>italiano</option>
+                    <option>中文</option>
+                    <option>Español</option>
+                </select>
             </div>
+            <div class="col-md-3">
+                <a class="footerText" href="#">Privacy Policy</a>
+            </div>
+            <div class="col-md-3">
+                <a class="footerText" href="#">Terms and Conditions</a>
+            </div>
+            <div class="col-md-3">
+                <p> © Mosley Entertainment. All rights reserved</p>
+            </div>
+        </div>
 
     </footer>
 
