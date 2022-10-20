@@ -1,7 +1,7 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import login_required
 from .models import Event, Booking, Comment
-from .forms import BookingForm, CommentForm
+from .forms import BookingForm, CommentForm, CreateEventForm
 
 
 bp = Blueprint('main', __name__)
@@ -21,6 +21,19 @@ def searchresults():
 @login_required
 def myconcerts():
     return render_template('myconcerts.html', title='My Concerts')
+
+@bp.route('/createevent', methods = ['GET', 'POST'])
+# @login_required --- left for now while creating page so easy to view 
+def createevent():
+
+    print('Method type: ', request.method)
+    form = CreateEventForm()
+    if form.validate_on_submit():
+        # get all the db stuff connected
+        # more db fields or less form options 
+        return redirect(url_for('main.index'))
+    return render_template('/eventCreation.html', form=form)
+
 
 
 @bp.route('/concert/<id>')
