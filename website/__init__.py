@@ -7,6 +7,8 @@ from flask_login import LoginManager
 import os
 # from pathlib import Path
 
+UPLOAD_FOLDER = '/static/image'
+
 db = SQLAlchemy()
 
 
@@ -19,9 +21,11 @@ def create_app():
     app.debug = True
     app.secret_key = 'utroutoru'
 
+    # for file uploads 
+    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
     # set TRACK_MODIFICATIONS to false to suppress start up warning
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
     # set the app configuration data (postgres in Heroku, SQLite in local)
     db_uri = os.environ.get('DATABASE_URL', 'sqlite:///db.sqlite3')
     # Heroku sets uri with 'postgres://' but SQLAlchemy needs 'postgresql://' syntax

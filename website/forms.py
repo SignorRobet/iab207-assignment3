@@ -2,7 +2,8 @@
 from flask_wtf import FlaskForm
 from wtforms.fields import (
     TextAreaField, SubmitField, StringField, PasswordField,
-    DateField, SelectField, DateTimeField, RadioField
+    DateField, SelectField, DateTimeField, RadioField,
+    IntegerField
 )
 from wtforms.validators import InputRequired, Length, Email, EqualTo, Regexp, Optional
 from flask_wtf.file import FileField, FileRequired, FileAllowed
@@ -61,14 +62,18 @@ class CommentForm(FlaskForm):
 
 # Incomplete, more fields, more validators, connect to db
 class CreateEventForm(FlaskForm):
-    stagename = StringField('Stage Name', validators=[InputRequired()])
+    # stagename = StringField('Stage Name', validators=[InputRequired()])
     eventname = StringField('Event Name', validators=[InputRequired()])
-    category = SelectField('Genre', choices =['Rock', 'Alternative', 'Blues', 'Pop', 'Country', 'Classical']) 
-    duration = StringField('Event Duration', validators=[InputRequired()])
-    info = StringField('Event Information', validators=[InputRequired()])
+    # genre = SelectField('Genre', choices =['Rock', 'Alternative', 'Blues', 'Pop', 'Country', 'Classical']) 
+    # duration = StringField('Event Duration', validators=[InputRequired()])
+    info = TextAreaField('Event Information', validators=[Length(min=50), InputRequired()])
     artistInfo = StringField('Artist', validators=[InputRequired()])
-    dateTime = DateTimeField('Date and Time')
+    dateTime = StringField('Date and Time')
     status = RadioField('Event Status', choices = ['Tickets Available', 'Booked Out', 'Cancalled', 'Do not Show Yet'])
     tickets = StringField('Available Tickets', validators=[InputRequired()])
     price = StringField('Price per Ticket', validators=[InputRequired()])
     submit = SubmitField("Create")
+    image = FileField("Upload Image", validators=[
+        FileAllowed(ALLOWED_IMAGE, message='Only supports png, jpg, JPG, PNG')])
+    venue = StringField("Venue", validators=[InputRequired()])
+    eventID = IntegerField("Event id", validators=[InputRequired()])
