@@ -1,7 +1,10 @@
+{% import "bootstrap/form.html" as wtf %}
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+
      <meta charset="UTF-8">
      <meta name = "viewport" content = "width=device-width, initial-scale=1">
      
@@ -48,7 +51,7 @@
     <link rel = "stylesheet" href="style.css">
 </head>
 <body>
-
+  {{wtf.render_form(form)}}
     <main class="container">
         <div class="my-3 p-3 createCSS">
             <h1 class="class=border-bottom pb-2 mb-0 text-center">CREATE AN EVENT</h1>
