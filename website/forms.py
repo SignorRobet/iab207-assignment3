@@ -68,12 +68,12 @@ class CreateEventForm(FlaskForm):
     # duration = StringField('Event Duration', validators=[InputRequired()])
     info = TextAreaField('Event Information', validators=[Length(min=50), InputRequired()])
     artistInfo = StringField('Artist', validators=[InputRequired()])
-    dateTime = StringField('Date and Time')
+    dateTime = DateTimeField('Date and Time (d-m-y h:m:s)', format='%d-%m-%Y %H:%M:%S')
     status = RadioField('Event Status', choices = ['Tickets Available', 'Booked Out', 'Cancalled', 'Do not Show Yet'])
     tickets = StringField('Available Tickets', validators=[InputRequired()])
     price = StringField('Price per Ticket', validators=[InputRequired()])
     submit = SubmitField("Create")
-    image = FileField("Upload Image", validators=[
+    image = FileField("Upload Event Image", validators=[
         FileAllowed(ALLOWED_IMAGE, message='Only supports png, jpg, JPG, PNG')])
     venue = StringField("Venue", validators=[InputRequired()])
     eventID = IntegerField("Event id", validators=[InputRequired()])
