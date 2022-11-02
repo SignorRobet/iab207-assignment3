@@ -49,7 +49,7 @@ def genre():
 def myconcerts():
     disp_bookings = Booking.query.all()
     disp_events = Event.query.all()
-    return render_template('myconcerts.html', title='My Concerts')
+    return render_template('myconcerts.html', title='My Concerts', event=disp_events, hosted=disp_bookings)
 
 @bp.route('/createevent', methods = ['GET', 'POST'])
 @login_required 
