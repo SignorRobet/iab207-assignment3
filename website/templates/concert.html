@@ -32,11 +32,12 @@
     {% endif %}
     {% endwith %}
 
-    <!-- Form rendering is simple and easy if using bootstrap -->
     <div class="row">
         <div class="col-md-6">
-            <p>booking form</p>
-            {{render_form(booking_form)}}
+            <button type="button" class="btn btn-primary btn-green" data-bs-toggle="modal"
+                data-bs-target="#ticketModal">
+                Book Tickets
+            </button>
         </div>
         <div class="col-md-6">
 
@@ -107,6 +108,91 @@
             </div>
         </div>
     </section>
+</div>
+
+<!-- Booking Modal -->
+<div class="modal fade" id="ticketModal" tabindex="-1" aria-labelledby="ticketModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            {{render_form(booking_form)}}
+
+
+            <form class="needs-validation ticketform"
+                oninput="subtotal.value = calculateSubtotal(ticketQuantity.value, ticketPrice.value)">
+
+                <div class="modal-header">
+                    <h4 class="modal-title" id="ticketModalLabel">Ticket Booking Form</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <fieldset>
+                        <legend>Tickets:</legend>
+                        <div class="mb-3">
+                            <label for="ticketPrice" class="col-form-label ticketform-label">Ticket
+                                Price:</label>
+                            <input type="number" class="form-control" id="ticketPrice" disabled value="14.99">
+                        </div>
+                        <div class="mb-3">
+                            <label for="ticketQuantity" class="col-form-label ticketform-label">Ticket
+                                Quantity:</label>
+                            <input type="number" class="form-control" id="ticketQuantity" min="1" value="1"
+                                oninput="ticketQuantity.value = validateTicketQuantity(ticketQuantity.value)" required>
+                            <div class="invalid-feedback">
+                                Please enter a positive ticket quantity.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="subtotal" class="col-form-label ticketform-label">Subtotal:</label>
+                            <output name="subtotal" for="ticketQuantity ticketPrice">$14.99</output>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Payment Details:</legend>
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="cardName" class="col-form-label ticketform-label">Card
+                                    Holder:</label>
+                                <input type="text" class="form-control" id="cardName">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="cardNumber" class="col-form-label ticketform-label">Card
+                                    Number:</label>
+                                <input type="text" class="form-control" id="cardNumber">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-auto">
+                                <label for="cardExpiry" class="col-form-label ticketform-label">Expiry:</label>
+                                <input type="text" class="form-control" id="cardExpiry">
+                            </div>
+                            <div class="col-auto ms-auto">
+                                <label for="cardCVV" class="col-form-label ticketform-label">CVV:</label>
+                                <input type="text" class="form-control" id="cardCVV">
+                            </div>
+                        </div>
+                    </fieldset>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="reset" class="btn btn-secondary btn-red me-auto" data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary btn-green">
+                        Confirm Purchase
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
 </div>
 
 {% endblock %}
