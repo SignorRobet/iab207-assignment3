@@ -64,7 +64,8 @@ def createevent():
         image = check_upload_file(form.image.data, 'events'),
         description = form.info.data, 
         venue = form.venue.data, 
-        time = form.dateTime.data, 
+        time = form.time.data, 
+        date = form.date.data, 
         capacity = form.tickets.data,
         ticket_price = form.price.data,
         user_id = current_user.id)
