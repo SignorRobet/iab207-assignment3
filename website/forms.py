@@ -3,7 +3,7 @@ from flask_wtf import FlaskForm
 from wtforms.fields import (
     TextAreaField, SubmitField, StringField, PasswordField,
     DateField, SelectField, DateTimeField, RadioField,
-    IntegerField, DecimalField
+    IntegerField, DecimalField, TimeField
 )
 from wtforms.validators import (
     InputRequired, Length, Email, EqualTo, Regexp, Optional, NumberRange)
@@ -92,8 +92,11 @@ class CreateEventForm(FlaskForm):
     # duration = StringField('Event Duration', validators=[InputRequired()])
     info = TextAreaField('Event Information', validators=[Length(min=10), InputRequired()])
     artist = StringField('Artist', validators=[InputRequired()])
-    # dateTime = DateTimeField("Date of Event", validators=[Optional()])
-    dateTime = DateTimeField('Date and Time (dd-mm-yyyy h:m:s)', format='%d-%m-%Y %H:%M:%S')
+
+    date = DateField("Date of Event", validators=[Optional()])
+    time = TimeField("Time of Event", validators=[Optional()])
+
+    # dateTime = DateTimeField('Date and Time (dd-mm-yyyy h:m:s)', format='%d-%m-%Y %H:%M:%S')
     status = RadioField('Event Status', choices = ['OPEN', 'UNPUBLISHED', 'SOLD-OUT', 'CANCELLED'])
     tickets = IntegerField('Available Tickets', validators=[InputRequired()])
     price = DecimalField('Price per Ticket 00.00', validators=[InputRequired()], places=2)

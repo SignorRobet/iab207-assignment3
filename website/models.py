@@ -76,7 +76,11 @@ class Event(db.Model):
     venue = db.Column(db.String(100), nullable=False)
     artist = db.Column(db.String(100), nullable=False)
 
-    time = db.Column(db.DateTime(timezone=False), nullable=False)
+    date = db.Column(db.Date, nullable=True)
+    tome = db.Column(db.Time, nullable=True)
+
+    # time = db.Column(db.DateTime(timezone=False), nullable=False)
+    
     capacity = db.Column(db.Integer, nullable=False)
     ticket_price = db.Column(db.Numeric(scale=2), nullable=False)
 
