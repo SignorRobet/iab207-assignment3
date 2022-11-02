@@ -5,7 +5,8 @@ from wtforms.fields import (
     DateField, SelectField, DateTimeField, RadioField,
     IntegerField
 )
-from wtforms.validators import InputRequired, Length, Email, EqualTo, Regexp, Optional
+from wtforms.validators import (
+    InputRequired, Length, Email, EqualTo, Regexp, Optional, NumberRange)
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 
 ALLOWED_IMAGE = {'PNG', 'JPG', 'png', 'jpg'}
@@ -54,17 +55,40 @@ class RegisterForm(FlaskForm):
 
 
 class BookingForm(FlaskForm):
-    pass
+    '''
+    WTForm for booking an event.
+
+    Auto-populated fields:
+    - user_id
+    - event_id
+    - booking_date
+    - booking_time
+    - price
+    '''
+    quantity = IntegerField("Quantity", validators=[
+        InputRequired(),
+        NumberRange(min=1, max=20, message="Ticket Quantity must be between 1 and 20")
+    ])
+    booking_submit = SubmitField("Book Tickets")
 
 
 class CommentForm(FlaskForm):
-    pass
+    '''
+    WTForm for commenting on an event.
+
+    Auto-populated fields:
+    - user_id
+    - event_id
+    - comment datetime
+    '''
+    text = TextAreaField("Write a comment...", validators=[InputRequired()])
+    comment_submit = SubmitField("Submit")
 
 # Incomplete, more fields, more validators, connect to db
 class CreateEventForm(FlaskForm):
     # stagename = StringField('Stage Name', validators=[InputRequired()])
     eventname = StringField('Event Name', validators=[InputRequired()])
-    # genre = SelectField('Genre', choices =['Rock', 'Alternative', 'Blues', 'Pop', 'Country', 'Classical']) 
+    # genre = SelectField('Genre', choices =['Rock', 'Alternative', 'Blues', 'Pop', 'Country', 'Classical'])
     # duration = StringField('Event Duration', validators=[InputRequired()])
     info = TextAreaField('Event Information', validators=[Length(min=50), InputRequired()])
     artistInfo = StringField('Artist', validators=[InputRequired()])

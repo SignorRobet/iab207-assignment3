@@ -1,11 +1,11 @@
 from dataclasses import dataclass
 from flask import Blueprint, render_template, request, redirect, url_for
-from flask_login import login_required
+from flask_login import login_required, current_user
+from datetime import datetime
+
 from .models import Event, Booking, Comment
 from .forms import BookingForm, CommentForm, CreateEventForm, LoginForm
 from . import db
-import os
-from werkzeug.utils import secure_filename
 from .functions import check_upload_file
 
 
@@ -53,23 +53,37 @@ def createevent():
 
     return render_template('/eventCreation.html', form=form, title="Create Concert")
 
-# def check_upload_file(form):
-#   # Get the data for the file from the create event form
-#   fp=form.image.data
-#   filename=fp.filename
-#   #Construting a file directory path up until this point
-#   BASE_PATH=os.path.dirname(__file__)
-#   upload_path=os.path.join(BASE_PATH,'/static/image/',secure_filename(filename))
-#   db_upload_path='/static/image/' + secure_filename(filename)
-#   # Saves as a local image
-#   fp.save(upload_path)
-#   return db_upload_path
 
-@bp.route('/concert/<id>')
+@bp.route('/concert/<id>', methods=['GET', 'POST'])
 def concert(id):
-    concert = Event.query.filter_by(id=1).first()
+    concert = Event.query.filter_by(id=id).first()
     comment_form = CommentForm()
     booking_form = BookingForm()
+
+    if (booking_form.booking_submit.data and booking_form.validate()):
+        print("In Booking form submission")
+        booking = Booking(user_id=current_user.id,
+                          event_id=concert.id,
+                          quantity=booking_form.quantity.data,
+                          price=(concert.ticket_price * booking_form.quantity.data),
+                          time=datetime.now())
+
+        db.session.add(booking)
+        db.session.commit()
+        return redirect(url_for('main.concert', id=id))
+
+    if (comment_form.comment_submit.data and comment_form.validate()):
+        print("In Comment form submission")
+        comment = Comment(user_id=current_user.id,
+                          event_id=concert.id,
+                          text=comment_form.text.data,
+                          time=datetime.now()
+                          )
+
+        db.session.add(comment)
+        db.session.commit()
+        return redirect(url_for('main.concert', id=id))
+
     return render_template(
         'concert.html',
         title='Concert',
