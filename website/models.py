@@ -20,6 +20,18 @@ class EventStatus(enum.Enum):
     SOLD_OUT = 'Sold-out'
     CANCELLED = 'Cancelled'
 
+class Genre(enum.Enum):
+    ROCK = 'Rock'
+    ALTERNATIVE = 'Alternative'
+    BLUES = 'Blues'
+    POP = 'Pop'
+    COUNTRY = 'Country'
+    CLASSICAL = 'Classical'
+    EDM = 'EDM'
+    JAZZ = 'Jazz'
+
+
+
 
 class User(UserMixin, db.Model):
     '''User Model'''
@@ -55,10 +67,14 @@ class Event(db.Model):
     status = db.Column(db.Enum(EventStatus),
                        default=EventStatus.UNPUBLISHED,
                        nullable=False)
+    genre = db.Column(db.Enum(Genre),
+                        default=Genre.ROCK,
+                        nullable=False)
 
-    image = db.Column(db.String(200), nullable=False)
+    image = db.Column(db.String(200), nullable=True)
     description = db.Column(db.String(1000), nullable=False)
     venue = db.Column(db.String(100), nullable=False)
+    artist = db.Column(db.String(100), nullable=False)
 
     time = db.Column(db.DateTime(timezone=False), nullable=False)
     capacity = db.Column(db.Integer, nullable=False)
