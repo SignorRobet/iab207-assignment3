@@ -33,31 +33,50 @@
                     <ul class="navbar-nav mx-auto mb-lg-0 gap-2">
 
                         <li class="nav-item nav-button">
+                            {% if title == "Home" %}
                             <a class="nav-link active btn btn-outline-primary nav-button_link" href="/"
                                 aria-current="page" title="Home" data-bs-toggle="tooltip" data-bs-placement="bottom">
                                 <i class="bi-house-fill nav-icon"></i>
                             </a>
+                            {% else %}
+                            <a class="nav-link btn btn-outline-primary nav-button_link" href="/" aria-current="page"
+                                title="Home" data-bs-toggle="tooltip" data-bs-placement="bottom">
+                                <i class="bi-house nav-icon"></i>
+                            </a>
+                            {% endif %}
                         </li>
 
                         <li class="nav-item nav-button">
-                            <a class="nav-link btn btn-outline-primary nav-button_link" href="#" aria-current="page"
-                                title="My Concerts" data-bs-toggle="tooltip" data-bs-placement="bottom">
+                            {% if title == "My Concerts" %}
+                            <a class="nav-link active btn btn-outline-primary nav-button_link" href="/myconcerts"
+                                aria-current="page" title="My Concerts" data-bs-toggle="tooltip"
+                                data-bs-placement="bottom">
+                                <i class="bi-calendar-week-fill nav-icon"></i>
+                            </a>
+                            {% else %}
+                            <a class="nav-link btn btn-outline-primary nav-button_link" href="/myconcerts"
+                                aria-current="page" title="My Concerts" data-bs-toggle="tooltip"
+                                data-bs-placement="bottom">
                                 <i class="bi-calendar-week nav-icon"></i>
                             </a>
+                            {% endif %}
                         </li>
 
                         <li class="nav-item nav-button">
-                            <a class="nav-link btn btn-outline-primary nav-button_link" href="/createevent" aria-current="page"
-                                title="Create Concert" data-bs-toggle="tooltip" data-bs-placement="bottom">
+                            {% if title == "Create Concert" %}
+                            <a class="nav-link active btn btn-outline-primary nav-button_link" href="/createevent"
+                                aria-current="page" title="Create Concert" data-bs-toggle="tooltip"
+                                data-bs-placement="bottom">
+                                <i class="bi-plus-circle-fill nav-icon"></i>
+                            </a>
+                            </a>
+                            {% else %}
+                            <a class="nav-link btn btn-outline-primary nav-button_link" href="/createevent"
+                                aria-current="page" title="Create Concert" data-bs-toggle="tooltip"
+                                data-bs-placement="bottom">
                                 <i class="bi-plus-circle nav-icon"></i>
                             </a>
-                        </li>
-
-                        <li class="nav-item nav-button">
-                            <a class="nav-link btn btn-outline-primary nav-button_link" href="#" aria-current="page"
-                                title="Nearby Events" data-bs-toggle="tooltip" data-bs-placement="bottom">
-                                <i class="bi-geo-alt nav-icon"></i>
-                            </a>
+                            {% endif %}
                         </li>
 
                     </ul>
@@ -76,7 +95,6 @@
                     <img class="dropdown rounded-circle ratio-1x1" src="{{current_user.image}}" alt="User Profile"
                         width="40" height="40">
                     {% endif %}
-
                     <div class="profile-hover rounded-circle"></div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
@@ -105,8 +123,7 @@
         {% endblock %}
     </main>
 
-    <footer>
-
+    <footer class="pt-4">
         <div class="row mx-0">
             <div class="col mainFooterCSS">
                 <br>
@@ -131,10 +148,10 @@
             <div class="col mainFooterCSS">
                 <br>
 
-                <a href="#"><img class="sMedia" src="/static/img/facebook.png" alt="Facebook"></a>
-                <a href="#"><img class="sMedia" src="/static/img/instagram.png" alt="Instagram"></a>
-                <a href="#"><img class="sMedia" src="/static/img/youtube.png" alt="Youtube"></a>
-                <a href="#"><img class="sMedia" src="/static/img/twitter.png" alt="Twitter"></a>
+                <a class="sMedia" href="#"><i class="bi bi-facebook"></i></a>
+                <a class="sMedia" href="#"><i class="bi bi-instagram"></i></a>
+                <a class="sMedia" href="#"><i class="bi bi-youtube"></i></a>
+                <a class="sMedia" href="#"><i class="bi bi-twitter"></i></a>
                 <br>
                 <br>
                 <br>

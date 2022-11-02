@@ -5,7 +5,8 @@ from wtforms.fields import (
     DateField, SelectField, DateTimeField, RadioField,
     IntegerField, DecimalField
 )
-from wtforms.validators import InputRequired, Length, Email, EqualTo, Regexp, Optional
+from wtforms.validators import (
+    InputRequired, Length, Email, EqualTo, Regexp, Optional, NumberRange)
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 
 ALLOWED_IMAGE = {'PNG', 'JPG', 'png', 'jpg'}
@@ -54,11 +55,34 @@ class RegisterForm(FlaskForm):
 
 
 class BookingForm(FlaskForm):
-    pass
+    '''
+    WTForm for booking an event.
+
+    Auto-populated fields:
+    - user_id
+    - event_id
+    - booking_date
+    - booking_time
+    - price
+    '''
+    quantity = IntegerField("Quantity", validators=[
+        InputRequired(),
+        NumberRange(min=1, max=20, message="Ticket Quantity must be between 1 and 20")
+    ])
+    booking_submit = SubmitField("Book Tickets")
 
 
 class CommentForm(FlaskForm):
-    pass
+    '''
+    WTForm for commenting on an event.
+
+    Auto-populated fields:
+    - user_id
+    - event_id
+    - comment datetime
+    '''
+    text = TextAreaField("Write a comment...", validators=[InputRequired()])
+    comment_submit = SubmitField("Submit")
 
 # Incomplete, more fields, more validators, connect to db
 class CreateEventForm(FlaskForm):
@@ -73,6 +97,7 @@ class CreateEventForm(FlaskForm):
     status = RadioField('Event Status', choices = ['OPEN', 'UNPUBLISHED', 'SOLD-OUT', 'CANCELLED'])
     tickets = IntegerField('Available Tickets', validators=[InputRequired()])
     price = DecimalField('Price per Ticket 00.00', validators=[InputRequired()], places=2)
+
     submit = SubmitField("Create")
     image = FileField("Upload Event Image", validators=[
         FileAllowed(ALLOWED_IMAGE, message='Only supports png, jpg, JPG, PNG')])

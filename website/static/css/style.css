@@ -98,7 +98,7 @@ Navbar
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
     opacity: 0;
     transition: opacity 0.5s ease;
 }
@@ -118,19 +118,19 @@ Navbar
     right: 2%;
 }
 
-.nav-button_link {
+.nav-button>.nav-button_link {
     border: none;
 }
 
-.nav-button_link:hover {
+.nav-button>.nav-button_link:hover {
     background-color: var(--thm-darkgrey);
 }
 
-.nav-button_link:focus {
+.nav-button>.nav-button_link:focus {
     border: none;
 }
 
-.nav-button_link.active {
+.nav-button>.nav-button_link.active {
     border-bottom: 3px solid var(--thm-green);
     background: none;
     border-radius: 0px;
@@ -142,14 +142,14 @@ Index
 
 .cardCSS {
 
-    width:100%;
+    width: 100%;
     font-family: Arial, sans-serif;
     font-size: 15px;
     position: relative;
     /* border: 3px solid rgb(222, 222, 222); */
     box-shadow: 10px 10px 5px rgb(222, 222, 222);
 
-    transition : all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 .buttonCSS {
@@ -200,7 +200,7 @@ Index
     left: 5px;
     color: black;
     font-size: 20px;
-    font-weight:100;
+    font-weight: 100;
     background: white;
     border-radius: 5px;
     border: 1px solid;
@@ -210,13 +210,14 @@ Index
 .dateCSS {
     border: 5px solid;
     font-size: 16px;
-    font-weight:100;
+    font-weight: 100;
     background: rgb(234, 234, 234);
     border-radius: 5px;
     padding: 5px 5px;
     text-align: center;
-    border: 0px 
+    border: 0px
 }
+
 /* .subHeadingsCSS {
     text-indent: 30px;
     font-size: 4vw;
@@ -253,8 +254,18 @@ Footer
 }
 
 .sMedia {
-    height: 40px;
-    width: 40px;
+    /* height: 40px;
+    width: 40px; */
+    color: var(--thm-black);
+    font-size: 28px;
+    transition: all 0.2s ease-in-out;
+}
+
+.sMedia:hover {
+    /* height: 40px;
+    width: 40px; */
+    color: rgb(50, 50, 50);
+    font-size: 28px;
 }
 
 /****************************************

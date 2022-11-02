@@ -38,7 +38,7 @@ def login():  # view function
         else:
             flash(error)
 
-    return render_template('user.html', form=login_form, heading='Login', title='Login')
+    return render_template('user.html', form=login_form, title='Login')
 
 
 @bp.route('/register', methods=['GET', 'POST'])
@@ -79,7 +79,7 @@ def register():
         else:
             flash(error)
 
-    return render_template('user.html', form=register_form, heading='Register', title='Register')
+    return render_template('user.html', form=register_form, title='Register')
 
 
 @bp.route('/logout', methods=['GET'])
