@@ -15,7 +15,8 @@ bp = Blueprint('main', __name__)
 
 @bp.route('/')
 def index():
-    return render_template('index.html', title='Home')
+    events = Event.query.all()    
+    return render_template('index.html', title='Home', events=events)
 
 
 @bp.route('/searchresults')
