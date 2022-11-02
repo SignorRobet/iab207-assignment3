@@ -1,13 +1,24 @@
 {% extends "base.html" %}
 {% from "bootstrap5/form.html" import render_form %}
 
-{% block header %}
-<div class="page-header">
-    <h4>{{heading}}</h4>
-</div>
-{% endblock %}
-
 {% block content %}
+
+<!-- Page Banner -->
+<section class="banner d-flex">
+    <div class="container h-100 mt-3 mb-0">
+        <div class="row h-100 mb-0">
+            <div class="col-12 d-flex flex-column mb-0">
+                <div class="mt-auto me-auto p-4 mb-0 bg-dark">
+                    <h2 class="details-h2">
+                        Concert Details
+                        <hr>
+                        {{concert.title}}
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <div class="container-fluid">
     {% with messages = get_flashed_messages() %}
@@ -28,21 +39,74 @@
             {{render_form(booking_form)}}
         </div>
         <div class="col-md-6">
-            {% if current_user.is_authenticated %}
-            <p>comment form</p>
-            {{render_form(comment_form)}}
-            {% else %}
-            <p>Authenticate before commenting</p>
-            {% endif %}
+
         </div>
     </div>
 
-    <!-- When you have login form, then do show the user a link to register -->
-    {% if heading|lower =='login' %}
-    <div class="col-md-4">
-        <p>New user? <a href="{{ url_for('auth.register') }}">Click here to register</a>.</p>
-    </div>
-    {% endif %}
+    <!-- Comments -->
+    <section class="pt-4">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-12">
+                    <div class="card text-dark">
+                        <!-- Comment Form -->
+                        <div class="card-header py-3 border-0">
+                            <h4 class="mb-4">User Comments</h4>
+                            {% if current_user.is_authenticated %}
+                            <div class="d-flex flex-start w-100">
+                                {% if current_user.image is none %}
+                                <img class="rounded-circle shadow-1-strong me-3" src="/static/img/default_profile.jpg"
+                                    alt="avatar" width="60" height="60" />
+                                {% else %}
+                                <img class="rounded-circle shadow-1-strong me-3" src="{{current_user.image}}"
+                                    alt="avatar" width="60" height="60" />
+                                {% endif %}
+
+                                <div class="form-floating w-100">
+                                    {{render_form(comment_form)}}
+                                </div>
+                            </div>
+                            {% else %}
+                            <h5>Please <a href="{{url_for('auth.login')}}">login</a> to leave a comment.</h5>
+                            {% endif %}
+                        </div>
+
+                        <!-- Comment Thread -->
+                        {% for comment in concert.comments|reverse %}
+                        <div class="card-body p-4">
+
+                            <div class="d-flex flex-start">
+                                {% if comment.user.image is none %}
+                                <img class="rounded-circle shadow-1-strong me-3" src="/static/img/default_profile.jpg"
+                                    alt="avatar" width="60" height="60" />
+                                {% else %}
+                                <img class="rounded-circle shadow-1-strong me-3" src="{{comment.user.image}}"
+                                    alt="avatar" width="60" height="60" />
+                                {% endif %}
+
+                                <div>
+                                    <h6 class="fw-bold mb-1">{{comment.user.first_name}} {{comment.user.last_name}}</h6>
+                                    <div class="d-flex align-items-center mb-3">
+                                        <p class="mb-0">
+                                            {{comment.time.strftime("%H:%M, %d %B %Y")}}
+                                        </p>
+                                    </div>
+                                    <p class="mb-0">
+                                        {{comment.text}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        {% if comment == concert.comments[0] %}
+                        {% else %}
+                        <hr class="my-0" />
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 
 {% endblock %}
