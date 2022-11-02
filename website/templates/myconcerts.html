@@ -3,7 +3,7 @@
 
 
 
-
+{% block header %}
      <!-- Page Banner // DON'T NEED TO EDIT -->
      <section class="banner d-flex">
         <div class="container h-100 mt-3 mb-0">
@@ -70,7 +70,7 @@
             </form>
         </div>
     </section>
-    
+{% endblock %}
 
 
    <!-- Index Table -->
@@ -93,10 +93,12 @@
                         </thead>
                         <tbody>
                             <tr>
+                                <!-- Hosted Events -->
                                 {% for hosted in disp_events %}
+                                
                                 <th scope="row">{{hosted.id}}</th>
                                 <td class="img-tablecell d-table-cell"><img class="img-fluid img-table"
-                                        src="static/img/AdobeStock_concertImage.jpeg" alt="Concert Image"></td>
+                                        src={{hosted.image}} alt="Concert Image"></td>
                                 <td>{{hosted.img}}</td>
                                 <td class="d-none d-sm-table-cell">{{hosted.title}}</td>
                                 <td> {{hosted.venue}} </td>
@@ -162,10 +164,10 @@
                        
                         <tr>
                             
-                            {% for event in disp_events %}
+                            {% for event in disp_bookings %}
                             <th scope="row">{{event.id}}</th>
                             <td class="img-tablecell d-table-cell"><img class="img-fluid img-table"
-                                    src="static/img/AdobeStock_concertImage.jpeg" alt="Concert Image"></td>
+                                    src= {{event.image}} alt="Concert Image"></td>
                             <td>{{event.title}}</td>
                             <td class="d-none d-sm-table-cell">{{event.venue}}</td>
                             <td> {{event.time}} </td>
