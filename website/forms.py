@@ -3,7 +3,7 @@ from flask_wtf import FlaskForm
 from wtforms.fields import (
     TextAreaField, SubmitField, StringField, PasswordField,
     DateField, SelectField, DateTimeField, RadioField,
-    IntegerField
+    IntegerField, DecimalField
 )
 from wtforms.validators import InputRequired, Length, Email, EqualTo, Regexp, Optional
 from flask_wtf.file import FileField, FileRequired, FileAllowed
@@ -64,16 +64,16 @@ class CommentForm(FlaskForm):
 class CreateEventForm(FlaskForm):
     # stagename = StringField('Stage Name', validators=[InputRequired()])
     eventname = StringField('Event Name', validators=[InputRequired()])
-    # genre = SelectField('Genre', choices =['Rock', 'Alternative', 'Blues', 'Pop', 'Country', 'Classical']) 
+    genre = SelectField('Genre', choices =['ROCK', 'ALTERNATIVE', 'BLUES', 'POP', 'COUNTRY', 'CLASSICAL', 'EDM', 'JAZZ']) 
     # duration = StringField('Event Duration', validators=[InputRequired()])
-    info = TextAreaField('Event Information', validators=[Length(min=50), InputRequired()])
-    artistInfo = StringField('Artist', validators=[InputRequired()])
-    dateTime = DateTimeField('Date and Time (d-m-y h:m:s)', format='%d-%m-%Y %H:%M:%S')
-    status = RadioField('Event Status', choices = ['Tickets Available', 'Booked Out', 'Cancalled', 'Do not Show Yet'])
-    tickets = StringField('Available Tickets', validators=[InputRequired()])
-    price = StringField('Price per Ticket', validators=[InputRequired()])
+    info = TextAreaField('Event Information', validators=[Length(min=10), InputRequired()])
+    artist = StringField('Artist', validators=[InputRequired()])
+    # dateTime = DateTimeField("Date of Event", validators=[Optional()])
+    dateTime = DateTimeField('Date and Time (dd-mm-yyyy h:m:s)', format='%d-%m-%Y %H:%M:%S')
+    status = RadioField('Event Status', choices = ['OPEN', 'UNPUBLISHED', 'SOLD-OUT', 'CANCELLED'])
+    tickets = IntegerField('Available Tickets', validators=[InputRequired()])
+    price = DecimalField('Price per Ticket 00.00', validators=[InputRequired()], places=2)
     submit = SubmitField("Create")
     image = FileField("Upload Event Image", validators=[
         FileAllowed(ALLOWED_IMAGE, message='Only supports png, jpg, JPG, PNG')])
     venue = StringField("Venue", validators=[InputRequired()])
-    eventID = IntegerField("Event id", validators=[InputRequired()])

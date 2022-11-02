@@ -1,215 +1,107 @@
-{% import "bootstrap/form.html" as wtf %}
 {% extends "base.html" %}
+{% from "bootstrap5/form.html" import render_form %}
+
 
 {% block content %}
 
-  {{wtf.render_form(form)}}
-    <main class="container">
-        <div class="my-3 p-3 createCSS">
-            <h1 class="class=border-bottom pb-2 mb-0 text-center">CREATE AN EVENT</h1>
-            
-            <div class="my-5 p-3 bg-body rounded shadow-sm">
-                <h3 class="class=border-bottom pb-2 mb-0">EVENT DETAILS</h3>
-                <form class="row g-3">
-                    <div class="col-md-4">
-                      <label for="inputEmail4" class="form-label">Stage Name</label>
-                      <input type="text" class="form-control" id="inputEmail4">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="inputPresentation" class="form-label">Name of Presentation</label>
-                        <input type="text" class="form-control" id="inputPresentation">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="inputCategory" class="form-label">Select Event Category</label>
-                        
-                        <select class="form-select" id = "inputCategory">
-                            <option selected>No Selection</option>
-                            <option value="1">Management/Leadership</option>
-                            <option value="2">Financial Technologies</option>
-                            <option value="3">Emerging Industries</option>
-                            <option value="4">Other</option>
-                            <option value="5">etc.</option>
-                        </select>
-                    </div>
-                    
-                    
-                    <div class="input-group">
-                        <span class="input-group-text">Duration of Event</span>
-                        <input type="text" aria-label="First name" class="form-control" placeholder="Hours">
-                        <input type="text" aria-label="Last name" class="form-control"  placeholder="Minutes">
-                    </div>
+<div class="container">
+    
+    <div class="my-3 p-3 createCSS">
+        <h1 class="class=border-bottom pb-2 mb-0 text-center">Create an Event</h1>
+       
+        <div class="my-5 p-3 bg-body rounded shadow-sm">
+            <h3 class="class=border-bottom pb-2 mb-0">Event Details</h3>
 
+            <form method="POST" action="{{url_for('main.createevent')}}" enctype="multipart/form-data">
+                {{form.hidden_tag()}}
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label">{{form.eventname.label}}</label>
+                        <br>
+                        {{form.eventname}}
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">{{form.artist.label}}</label>
+                        <br>
+                        {{form.artist}}
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">{{form.genre.label}}</label>
+                        {{form.genre}}
+                    </div>
+                    <div class="input-group col-md-8">
+                        <span class="input-group-text">{{form.dateTime.label}}</span>
+                        {{form.dateTime}}
+                    </div>
+  
                     <div class="col-12">
                         <div class="input-group">
-                            <span class="input-group-text">Event Info</span>
-                            <textarea class="form-control" placeholder="Provide a brief description of what your event is about"></textarea>
-                          </div>
+                            <span class="input-group-text">{{form.info.label}}</span>
+                            {{form.info}}                         
+                        </div>
                     </div>
                     <div class="col-12">
                         <div class="input-group">
-                            <span class="input-group-text">Presenter Info</span>
-                            <textarea class="form-control" placeholder="Provide a brief introduction of yourself, your history or anything else your audience might like to know about you!"></textarea>
-                          </div>
-                    </div>
-                  </form>
-        </div>
-
-        <div class="my-5 p-3 bg-body rounded shadow-sm">
-            <h3 class="class=border-bottom pb-2 mb-0">Location Information</h3>
-            <form class="row g-3">
-                <div class="col-md-12">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">#</span>
-                        <input type="text" class="form-control" placeholder="Event ID - Your unique Event ID will verify dates and times to customise // All of your prearranged dates will display as additional boxes to edit below" aria-label="Event ID" aria-describedby="basic-addon1">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2" >Check</button>
-                    </div>
-                </div>
-
-                <h4 class="text-center class=border-bottom pb-2 mb-0">Your Event is being hosted at: Lorem ipsum dolor</h4>
-
-                <div class = "row g-3">
-                    <div class="col-md-6">
-                        <label for="inputTime" class="form-label">Date(s)</label>
-                        <select id="inputTime" class="form-select">
-                        <option selected></option>
-                        <option>Available dates that have been confirmed with venue will be displayed here</option>
-                        <option>Available date 1</option>
-                        <option>Available date 2</option>
-                        <option>Available date 3</option>
-                        <option>...</option>
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                    <label for="inputState" class="form-label">Time(s)</label>
-                    <select id="inputState" class="form-select">
-                        <option selected></option>
-                        <option>Select Time for Corresponding date</option>
-                        <option>Available Time 1</option>
-                        <option>Available Time 2</option>
-                        <option>Available Time 3</option>
-                        <option>...</option>
-                    </select>
-                    </div>
-                </div>
-
-                <div class = "row g-3">
-                    <div class="col-md-3 form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                        <label class="form-check-label" for="exampleRadios1">
-                          Tickets Available
-                        </label>
-                      </div>
-                      <div class=" col-md-3 form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                        <label class="form-check-label" for="exampleRadios2">
-                          Booked Out
-                        </label>
-                      </div>
-                      <div class="col-md-3 form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                        <label class="form-check-label" for="exampleRadios2">
-                          Cancelled
-                        </label>
-                      </div>
-                      <div class="col-md-3 form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                        <label class="form-check-label" for="exampleRadios2">
-                          Do not Show Yet
-                        </label>
-                      </div>
-
-                </div>
-                
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1">#</span>
-                            <input type="text" class="form-control" placeholder="Number of Available Seats" aria-label="Event Seats" aria-describedby="basic-addon1">
+                            <span class="input-group-text">{{form.venue.label}}</span>
+                            {{form.venue}}                         
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1">$</span>
-                            <input type="text" class="form-control" placeholder="Price per Seat" aria-label="Event Seat Price" aria-describedby="basic-addon1">
+                    <div class="col-12">
+                        <div class="input-group">
+                            <span class="input-group-text">{{form.status.label}}</span>
+                            {{form.status}}                         
                         </div>
                     </div>
-                </div>
-            </form>
-        </div>
+  
 
-        <div class="my-5 p-3 bg-body rounded shadow-sm">
-            
-            <form class="row g-3">
-               
-                <div class="col-md-6">
-                    <h3 class="class=border-bottom pb-2 mb-0">Add a Cover Photo</h3>
-                    <div class="input-group mb-3">
-                        
-                        <input type="file" class="form-control" id="inputGroupFile02">
-                        <label class="input-group-text" for="inputGroupFile02">Upload</label>
-                      </div>
-                </div>
-
-                
-                <div class="col-md-6">
-                    <h3 class="class=border-bottom pb-2 mb-0">Add a Presenter Photo</h3>
-                    <div class="input-group mb-3">
-                        
-                        <input type="file" class="form-control" id="inputGroupFile02">
-                        <label class="input-group-text" for="inputGroupFile02">Upload</label>
-                      </div>
-                </div>
-
-                <div class="row g-3">
-                    <h3 class="class=border-bottom pb-2 mb-0">Add Other Media (Photos and Videos)</h3>
-                    <div class="input-group mb-3">
-                        
-                        <input type="file" class="form-control" id="inputGroupFile02">
-                        <label class="input-group-text" for="inputGroupFile02">Upload</label>
-                      </div>
-                </div>
-            </form>
-        </div>
-
-        <div class="my-5 p-3 bg-body rounded shadow-sm">
-            <h3 class="class=border-bottom pb-2 mb-0 text-center">Event Summary</h3>
-            <div class="row g-3">
-                <h4>Location: </h4>
-                <h4>Dates and Times:</h4>
-                <p>Date01/01/xx: Times:</p>
-                <p>Date02/01/xx: Times:</p>
-                <p>Date03/01/xx: Times:</p>
-                <h4>Available Seats:</h4>
-                <h4>Price per Seat</h4>
-                <h4>Potential Revenue from ticket sales: $0.0</h4>
-                
-                <a href = "eventDetails.html" class="btn">Preview Site</a>
- 
-            </div>
-        </div>
-
-        <div class="my-5 p-3 bg-body rounded shadow-sm">
-            <h3 class="class=border-bottom pb-2 mb-0 text-center">Confirm Event</h3>
-
-            <div class="row">
-                <div class="col-md-12 text-center>
-                    <div class="form-check form-switch ">
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">List on site?</label>
+                    <div class="row g-3">
+                        <h3 class="class=border-bottom pb-2 mb-0">{{form.image.label}}</h3>
+                        {{form.image}}
+                        <div class="input-group mb-3">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="input-group mb-3">
+                                        <label for="inputEmail4" class="form-label">{{form.tickets.label}}</label>
+  
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group mb-3">
+                                        <label for="inputPresentation" class="form-label">{{form.price.label}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="input-group mb-3">
+                                       
+                                        <span class="input-group-text"  id="basic-addon1">#</span>
+                                        {{form.tickets}}                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">$</span>
+                                        {{form.price}}                                    </div>
+                                </div>
+         
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            {{form.submit.label}}
+                            {{form.submit}}
+                        </div>   
                     </div>
                 </div>
-                
-            </div>
 
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <button type="submit" class="btnSubmit">Create Event!</button>
-                </div>
-            </div>
-                
 
+            </form>
         </div>
-    </main>
+    </div>
+
+</div>
+
+         
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 
-    {% endblock %}
+{% endblock %}

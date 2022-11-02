@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from flask import Blueprint, render_template, request, redirect, url_for
-from flask_login import login_required
+from flask_login import login_required, current_user
 from .models import Event, Booking, Comment
 from .forms import BookingForm, CommentForm, CreateEventForm, LoginForm
 from . import db
@@ -29,13 +29,16 @@ def myconcerts():
     return render_template('myconcerts.html', title='My Concerts')
 
 @bp.route('/createevent', methods = ['GET', 'POST'])
-# @login_required --- left for now while creating page so easy to view 
+@login_required # --- left for now while creating page so easy to view 
 def createevent():
     form = CreateEventForm()
+
+    print("The form has been submitted 22")
     if (form.validate_on_submit() == True):
         print("The form has been submitted")
-        event = Event(id = form.eventID.data,
+        event = Event(
         title = form.eventname.data, 
+        artist = form.artist.data,
         status = form.status.data, 
         image = check_upload_file(form.image.data, 'events'),
         description = form.info.data, 
@@ -43,7 +46,7 @@ def createevent():
         time = form.dateTime.data, 
         capacity = form.tickets.data,
         ticket_price = form.price.data,
-        user_id = 500)
+        user_id = current_user.id)
   
         
         db.session.add(event)

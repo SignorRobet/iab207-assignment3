@@ -24,6 +24,14 @@ Global
     --thm-green: #138555;
     --thm-darkgreen: #0f6642;
 
+    /* New colour palette */
+    --thm-lightgrey: #D8DBE2;
+    --thm-steelgrey: #A9BCD0;
+    /* buttons in purple */
+    --thm-brightviolet: #781FFF; 
+    --thm-charcol: #373F51;
+    --thm-eerieblack: #1B1B1E;
+
     --font-brand: 'Bauhaus 93', sans-serif;
 }
 
