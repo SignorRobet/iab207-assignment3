@@ -14,7 +14,7 @@
             </div>
         </div>
     </section>
-    {% block content %}
+   
     <section class="pb-md-3 pt-5">
         <div class="container">
             <form>
@@ -70,9 +70,11 @@
             </form>
         </div>
     </section>
+    
 
 
    <!-- Index Table -->
+{% block content %}
    <section class="pt-3">
     <div class="container">
         <div class="row">
@@ -115,6 +117,7 @@
     </div>
 </section>
 
+
 <section class="pb-md-3 pt-5">
     <div class="container">
         <form>
@@ -138,6 +141,7 @@
 
 
 <!-- Index Table -->
+
 <section class="pt-3">
 <div class="container">
     <div class="row">
@@ -157,6 +161,7 @@
                     <tbody>
                        
                         <tr>
+                            
                             {% for event in disp_events %}
                             <th scope="row">{{event.id}}</th>
                             <td class="img-tablecell d-table-cell"><img class="img-fluid img-table"
