@@ -26,6 +26,26 @@
             </div>
         </section>
 
+        <section class="pb-md-3 pt-5">
+            <div class="container" style="width: 60%">
+                <form class="form-inline d-flex flex-nowrap" action="{{url_for('main.genre')}}">
+                    <label class="filter-label" for="genre-select">Genre:</label>
+                    <select class="form-select" title="Genre Select" id="genre-select" name="genre">
+                        <option selected value="all">--All Genres--</option>
+                        <option value="ROCK">ROCK</option>
+                        <option value="ALTERNATIVE">ALTERNATIVE</option>
+                        <option value="BLUES">BLUES</option>
+                        <option value="POP">POP</option>
+                        <option value="COUNTRY">COUNTRY</option>
+                        <option value="CLASSICAL">CLASSICAL</option>
+                        <option value="EDM">EDM</option>
+                        <option value="JAZZ">JAZZ</option>
+                    </select>
+                    <div class="col-1"></div><button type="submit" class="flex-shrink-1 btn btn-primary my-1">Search</button></div>
+                </form>
+            </div>
+        </section>
+
         <section>
             <div class="container">
 
