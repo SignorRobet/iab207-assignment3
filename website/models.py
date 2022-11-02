@@ -77,7 +77,7 @@ class Event(db.Model):
     artist = db.Column(db.String(100), nullable=False)
 
     date = db.Column(db.Date, nullable=True)
-    tome = db.Column(db.Time, nullable=True)
+    time = db.Column(db.Time, nullable=True)
 
     # time = db.Column(db.DateTime(timezone=False), nullable=False)
     
