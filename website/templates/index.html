@@ -19,55 +19,10 @@
         <!-- Index Filtering Form -->
         <section class="pb-md-3 pt-5">
             <div class="container">
-                <form>
-                    <div class="row w-100">
-                        <div class="col-md-5 mt-auto">
-                            <div>
-                                <label class="filter-label" for="search">Artist or Venue:</label>
-                                <input id="Search" type="text" class="form-control" title="Search"
-                                    placeholder="Search by Artist or Venue" />
-
-                                <label class="filter-label" for="genre-select">Genre:</label>
-                                <select class="form-select" title="Genre Select" id="genre-select">
-                                    <option selected value="all">--All Genres--</option>
-                                    <option value="country">Country</option>
-                                    <option value="electronic">Electronic</option>
-                                    <option value="metal">Metal</option>
-                                    <option value="rock">Rock</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-md-5 mt-auto">
-                            <div>
-                                <label class="filter-label" for="status-select">Status:</label>
-                                <select class="form-select" title="Status Select" id="status-select">
-                                    <option selected value="all">--All Statuses--</option>
-                                    <option value="upcoming">Upcoming</option>
-                                    <option value="inactive">Inactive</option>
-                                    <option value="booked">Booked</option>
-                                    <option value="cancelled">Cancelled</option>
-                                </select>
-
-                                <label class="filter-label" for="datePicker">Date: </label>
-                                <input id="datePicker" type="date" class="form-control" title="Date Picker" />
-                            </div>
-                        </div>
-
-                        <div class="col-auto mt-auto ms-auto">
-                            <div class="d-grid mx-auto py-3 py-md-0 mb-md-4">
-                                <button class="btn btn-danger btn-red" type="reset">
-                                    Reset Filters
-                                </button>
-                            </div>
-                            <div class="d-grid mx-auto">
-                                <button class="btn btn-primary btn-green" type="submit">
-                                    Apply Filters
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+                <form class="form-inline d-flex flex-nowrap" action="{{url_for('main.search')}}" >
+                    <input type="text" name="search" class="form-control flex-grow-1 my-1 mr-sm-2" id="SearchForm">
+                    <button type="submit" class="flex-shrink-1 btn btn-primary my-1">Search</button>
+                  </form>
             </div>
         </section>
 
@@ -83,7 +38,7 @@
             </div>
                 <!-- First Row of Events -->
             <div class="card-group" >
-                {% for event in events %}
+                {% for event in events|reverse %}
                 <div class="col-md-4 col-sm-6" style="padding: 1%">
                         <div class="card">
                             <img class="card-img-top" src={{event.image}} alt="event picture">

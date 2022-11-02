@@ -23,6 +23,16 @@ def index():
 def searchresults():
     return render_template('searchresults.html', title='Search Results')
 
+@bp.route('/search')
+def search():
+    if request.args['search']:
+        print(request.args['search'])
+        dest = "%" + request.args['search'] + '%'
+        events = Event.query.filter(Event.title.like(dest)).all()
+        return render_template('index.html', events=events)
+    else:
+        return redirect(url_for('main.index'))
+
 
 @bp.route('/myconcerts')
 @login_required
