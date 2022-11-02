@@ -69,7 +69,7 @@ class CreateEventForm(FlaskForm):
     info = TextAreaField('Event Information', validators=[Length(min=50), InputRequired()])
     artistInfo = StringField('Artist', validators=[InputRequired()])
     dateTime = DateTimeField('Date and Time (d-m-y h:m:s)', format='%d-%m-%Y %H:%M:%S')
-    status = RadioField('Event Status', choices = ['Tickets Available', 'Booked Out', 'Cancalled', 'Do not Show Yet'])
+    status = RadioField('Event Status', choices = ['OPEN', 'UNPUBLISHED', 'SOLD_OUT', 'CANCELLED'])
     tickets = StringField('Available Tickets', validators=[InputRequired()])
     price = StringField('Price per Ticket', validators=[InputRequired()])
     submit = SubmitField("Create")
