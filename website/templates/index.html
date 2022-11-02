@@ -18,31 +18,42 @@
 
         <!-- Index Filtering Form -->
         <section class="pb-md-3 pt-5">
-            <div class="container" style="width: 60%">
-                <form class="form-inline d-flex flex-nowrap" action="{{url_for('main.search')}}">
-                    <div class="col-8"><input type="text" name="search" class="form-control flex-grow-1 my-1 mr-sm-2 mr-5" id="SearchForm"> </div>
-                    <div class="col-1"></div><button type="submit" class="flex-shrink-1 btn btn-primary my-1">Search</button></div>
-                </form>
+            
+            <div class="container">
+                <div class="mx-auto">
+                    <h1>Search by title</h1>
+                    <form class="form-inline " action="{{url_for('main.search')}}">
+                        <div class="row">
+
+                        <div class="col-lg-8"><input type="text" name="search" class="form-control" id="SearchForm"> </div>
+                        <div class="col-lg-4"><button type="submit" class="btn btn-primary my-1">Search</button></div>
+                    </div>
+
+                    </form>
+                </div>
+                    
+           
             </div>
         </section>
-
         <section class="pb-md-3 pt-5">
-            <div class="container" style="width: 60%">
-                <form class="form-inline d-flex flex-nowrap" action="{{url_for('main.genre')}}">
-                    <label class="filter-label" for="genre-select">Genre:</label>
-                    <select class="form-select" title="Genre Select" id="genre-select" name="genre">
-                        <option selected value="all">--All Genres--</option>
-                        <option value="ROCK">ROCK</option>
-                        <option value="ALTERNATIVE">ALTERNATIVE</option>
-                        <option value="BLUES">BLUES</option>
-                        <option value="POP">POP</option>
-                        <option value="COUNTRY">COUNTRY</option>
-                        <option value="CLASSICAL">CLASSICAL</option>
-                        <option value="EDM">EDM</option>
-                        <option value="JAZZ">JAZZ</option>
-                    </select>
-                    <div class="col-1"></div><button type="submit" class="flex-shrink-1 btn btn-primary my-1">Search</button></div>
-                </form>
+            <div class="container">
+                <div class="mx-auto">
+                    <h1>Or Search by Genre</h1>
+                    <form class="form-inline d-flex flex-nowrap" action="{{url_for('main.genre')}}">
+                        <select class="form-select" title="Genre Select" id="genre-select" name="genre">
+                            <option selected value="all">--All Genres--</option>
+                            <option value="ROCK">ROCK</option>
+                            <option value="ALTERNATIVE">ALTERNATIVE</option>
+                            <option value="BLUES">BLUES</option>
+                            <option value="POP">POP</option>
+                            <option value="COUNTRY">COUNTRY</option>
+                            <option value="CLASSICAL">CLASSICAL</option>
+                            <option value="EDM">EDM</option>
+                            <option value="JAZZ">JAZZ</option>
+                        </select>
+                        <button type="submit" class="flex-shrink-1 btn btn-primary my-1">Search</button>
+                </div>
+                    </form>
             </div>
         </section>
 
@@ -59,6 +70,7 @@
                 <!-- First Row of Events -->
             <div class="card-group" style="padding-left:4%; padding-right:4%;">
                 {% for event in events|reverse %}
+                {% if event.status.name != 'UNPUBLISHED' %}
                 <div class="col-md-4 col-sm-6" style="padding: 1%">
                         <div class="card">
                             <img class="card-img-top" src={{event.image}} alt="event picture">
@@ -69,6 +81,7 @@
                             <div class="card-footer"><a href = "{{url_for('main.concert', id=event.id)}}" class ="btn btn-danger"> View Details </a></div>
                         </div>
                 </div>
+                {%endif%}
                 {% endfor %}
             </div>
 
