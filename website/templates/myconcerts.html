@@ -165,7 +165,7 @@
                        
                         <tr>
                             
-                            {% for event in disp_bookings %}
+                            {% for event in current_user.bookings %}
                             <th scope="row">{{event.id}}</th>
                             <td class="img-tablecell d-table-cell"><img class="img-fluid img-table"
                                     src= {{event.image}} alt="Concert Image"></td>
