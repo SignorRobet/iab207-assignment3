@@ -66,9 +66,9 @@ class BookingForm(FlaskForm):
     - booking_time
     - price
     '''
-    quantity = IntegerField("Quantity", validators=[
+    quantity = IntegerField("Ticket Quantity", validators=[
         InputRequired(),
-        NumberRange(min=1, max=20, message="Ticket Quantity must be between 1 and 20")
+        NumberRange(min=1, message="Ticket Quantity must be greater than 0")
     ])
     booking_submit = SubmitField("Book Tickets")
 
@@ -86,10 +86,12 @@ class CommentForm(FlaskForm):
     comment_submit = SubmitField("Submit")
 
 # Incomplete, more fields, more validators, connect to db
+
+
 class CreateEventForm(FlaskForm):
     # stagename = StringField('Stage Name', validators=[InputRequired()])
     eventname = StringField('Event Name', validators=[InputRequired()])
-    genre = SelectField('Genre', choices =['ROCK', 'ALTERNATIVE', 'BLUES', 'POP', 'COUNTRY', 'CLASSICAL', 'EDM', 'JAZZ']) 
+    genre = SelectField('Genre', choices=['ROCK', 'ALTERNATIVE', 'BLUES', 'POP', 'COUNTRY', 'CLASSICAL', 'EDM', 'JAZZ'])
     # duration = StringField('Event Duration', validators=[InputRequired()])
     info = TextAreaField('Event Information', widget=TextArea(), validators=[Length(min=10), InputRequired()])
     artist = StringField('Artist', validators=[InputRequired()])
@@ -98,7 +100,7 @@ class CreateEventForm(FlaskForm):
     time = TimeField("Time of Event", validators=[Optional()])
 
     # dateTime = DateTimeField('Date and Time (dd-mm-yyyy h:m:s)', format='%d-%m-%Y %H:%M:%S')
-    status = RadioField('Event Status', choices = ['OPEN', 'UNPUBLISHED', 'SOLD_OUT', 'CANCELLED'])
+    status = RadioField('Event Status', choices=['OPEN', 'UNPUBLISHED', 'SOLD_OUT', 'CANCELLED'], default='OPEN')
     tickets = IntegerField('Available Tickets', validators=[InputRequired()])
     price = DecimalField('Price per Ticket', validators=[InputRequired()], places=2)
 

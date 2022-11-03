@@ -20,7 +20,7 @@
     </div>
 </section>
 
-<div class="container-fluid">
+<div class="container pt-5">
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     {% for message in get_flashed_messages() %}
@@ -32,22 +32,107 @@
     {% endif %}
     {% endwith %}
 
-    <!-- Form rendering is simple and easy if using bootstrap -->
-    <div class="row">
-        <div class="col-md-6">
-            <p>booking form</p>
-            {{render_form(booking_form)}}
+    <section class="pt-2">
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="card">
+                    <h4 class="card-header">
+                        Description
+                    </h4>
+                    <div class="card-body">
+                        <p class="card-text">
+                            {{concert.description}}
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-md-6">
 
+        <div class="row mb-3">
+
+            <div class="col-md-6">
+                <div class="card">
+                    <h4 class="card-header">
+                        {{concert.title}}
+                    </h4>
+                    <div class="card-body">
+                        <div class="d-flex flex-inline align-items-center">
+                            <h6 class="card-title me-3 my-2 ctitle-width">Artist:</h6>
+                            <p class="card-text">{{concert.artist}}</p>
+                        </div>
+                        <div class="d-flex flex-inline align-items-center">
+                            <h6 class="card-title me-3 my-2 ctitle-width">Genre:</h6>
+                            <p class="card-text">{{concert.genre.value}}</p>
+                        </div>
+                        <div class="d-flex flex-inline align-items-center">
+                            <h6 class="card-title me-3 my-2 ctitle-width">Event Status:</h6>
+                            <p class="card-text">{{concert.status.value}}</p>
+                        </div>
+                        <div class="d-flex flex-inline align-items-center">
+                            <h6 class="card-title me-3 my-2 ctitle-width">Date:</h6>
+                            <p class="card-text">{{concert.date}}</p>
+                        </div>
+                        <div class="d-flex flex-inline align-items-center">
+                            <h6 class="card-title me-3 my-2 ctitle-width">Time:</h6>
+                            <p class="card-text">{{concert.time}}</p>
+                        </div>
+                        <div class="d-flex flex-inline align-items-center">
+                            <h6 class="card-title me-3 my-2 ctitle-width">Venue:</h6>
+                            <p class="card-text">{{concert.venue}}</p>
+                        </div>
+                        <div class="d-flex flex-inline align-items-center">
+                            <h6 class="card-title me-3 my-2 ctitle-width">Ticket Price:</h6>
+                            <p class="card-text">${{concert.ticket_price}}</p>
+                        </div>
+                        <div class="d-flex flex-inline align-items-center mb-3">
+                            <h6 class="card-title me-3 my-2 ctitle-width">Remaining Tickets:</h6>
+                            <p class="card-text">{{concert.capacity - concert.tickets_booked}}</p>
+                        </div>
+
+                        <!-- Book Tickets Button -->
+                        {% if concert.status.name == 'OPEN' %}
+                        <button type="button" class="btn btn-primary btn-green" data-bs-toggle="modal"
+                            data-bs-target="#ticketModal">
+                            Book Tickets
+                        </button>
+                        {% else %}
+                        <button type="button" class="btn btn-primary btn-green" disabled>
+                            {% if concert.status.name == 'UNPUBLISHED' %}
+                            Tickets unavailable
+                            {% elif concert.status.name == 'CANCELLED' %}
+                            Concert Cancelled
+                            {% elif concert.status.name == 'SOLD_OUT' %}
+                            Tickets Sold Out
+                            {% endif %}
+                        </button>
+                        {% endif %}
+
+                        <!-- TODO link to edit concert page -->
+                        {% if concert.user.id == current_user.id %}
+                        <a href="{{url_for('main.concert', id=concert.id)}}" class="btn btn-danger ms-2">
+                            Edit Event
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 d-flex">
+                {% if concert.image is none %}
+                <img class="ms-md-auto img-fluid img-details rounded-2" src="/static/img/default_event.jpg"
+                    alt="Concert Image" />
+                {% else %}
+                <img class="ms-md-auto img-fluid img-details rounded-2" src="{{concert.image}}" alt="Concert Image" />
+                {% endif %}
+            </div>
         </div>
-    </div>
+    </section>
 
     <!-- Comments -->
     <section class="pt-4">
         <div class="container">
             <div class="row d-flex justify-content-center">
-                <div class="col-md-12">
+                <div class="px-0">
                     <div class="card text-dark">
                         <!-- Comment Form -->
                         <div class="card-header py-3 border-0">
@@ -107,6 +192,83 @@
             </div>
         </div>
     </section>
+</div>
+
+<!-- Booking Modal -->
+<div class="modal fade" id="ticketModal" tabindex="-1" aria-labelledby="ticketModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form class="" method="POST"
+                oninput="subtotal.value = calculateSubtotal(quantity.value, ticketPrice.value)">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="ticketModalLabel">Ticket Booking Form</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    {{booking_form.hidden_tag()}}
+
+                    <fieldset>
+                        <legend>Tickets:</legend>
+                        <div class="mb-3">
+                            <label for="ticketPrice" class="col-form-label ticketform-label">
+                                Ticket Price:
+                            </label>
+                            <input type="number" class="form-control" id="ticketPrice" disabled
+                                value="{{concert.ticket_price}}" />
+                        </div>
+                        <div class="">
+                            {{booking_form.quantity.label(class="form-label")}} </div>
+                        <div class="">
+                            {{booking_form.quantity(class="form-control")}}
+                        </div>
+                        <div class="mb-3">
+                            <label for="subtotal" class="col-form-label ticketform-label">Subtotal:</label>
+                            <output name="subtotal" for="quantity ticketPrice">${{concert.ticket_price}}</output>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend class="mt-1">Payment Details:</legend>
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="cardName" class="col-form-label ticketform-label">Card
+                                    Holder:</label>
+                                <input type="text" class="form-control" id="cardName" disabled>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="cardNumber" class="col-form-label ticketform-label">Card
+                                    Number:</label>
+                                <input type="text" class="form-control" id="cardNumber" disabled>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-auto">
+                                <label for="cardExpiry" class="col-form-label ticketform-label">Expiry:</label>
+                                <input type="text" class="form-control" id="cardExpiry" disabled>
+                            </div>
+                            <div class="col-auto ms-auto">
+                                <label for="cardCVV" class="col-form-label ticketform-label">CVV:</label>
+                                <input type="text" class="form-control" id="cardCVV" disabled>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="reset" class="btn btn-secondary btn-red me-auto" data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+                    <div>
+                        {{booking_form.booking_submit(class="")}}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 {% endblock %}
