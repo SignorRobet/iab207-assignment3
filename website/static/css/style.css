@@ -280,4 +280,70 @@ Booking History
 .img-tablecell {
     width: -moz-fit-content;
     width: fit-content;
+<<<<<<< Updated upstream
 }
+=======
+}
+
+/****************************************
+Create Event
+*****************************************/
+
+.bookingBox {
+    width: 100%;
+    border: 0px solid var(--thm-charcol);
+    background: linear-gradient(360deg, var(--thm-lightgrey), rgb(242, 242, 242));
+    border-radius: 5px;
+    padding: 20px;
+    margin: 100px;
+
+    box-shadow: 10px 10px 5px rgb(222, 222, 222);
+    transition: all 0.5s ease;
+}
+
+.bookingElements {
+    padding: 8x;
+    margin: 20px;
+    width: 100%;
+}
+
+.bookingInputHeadings {
+    background: var(--thm-steelgrey);
+    border: 0px solid var(--thm-charcol);
+    
+}
+
+input[type=submit]{
+    background-color: var(--thm-brightviolet);
+    color: var(--thm-lightgrey);
+    border-radius: 25px;
+    padding: 10px;
+    margin: 10px;
+    width: 30%;
+    transition: 0.3s 0s ease-out;
+    border: none;
+}
+
+input[type=submit]:hover {
+    background-color: var(--thm-darkpurple);
+    color: white;
+    border-radius: 25px;
+    transition: 0.3s 0s ease-out;
+    border: none;
+}
+
+
+/****************************************
+Other
+*****************************************/
+
+.nobullets ul {
+    list-style-type: none;
+}
+
+.indexcards {
+    
+    margin-left: 3%;
+    margin-right: 3%;
+}
+>>>>>>> Stashed changes
