@@ -8,6 +8,7 @@ from wtforms.fields import (
 from wtforms.validators import (
     InputRequired, Length, Email, EqualTo, Regexp, Optional, NumberRange)
 from flask_wtf.file import FileField, FileRequired, FileAllowed
+from wtforms.widgets import TextArea
 
 ALLOWED_IMAGE = {'PNG', 'JPG', 'png', 'jpg'}
 
@@ -90,16 +91,16 @@ class CreateEventForm(FlaskForm):
     eventname = StringField('Event Name', validators=[InputRequired()])
     genre = SelectField('Genre', choices =['ROCK', 'ALTERNATIVE', 'BLUES', 'POP', 'COUNTRY', 'CLASSICAL', 'EDM', 'JAZZ']) 
     # duration = StringField('Event Duration', validators=[InputRequired()])
-    info = TextAreaField('Event Information', validators=[Length(min=10), InputRequired()])
+    info = TextAreaField('Event Information', widget=TextArea(), validators=[Length(min=10), InputRequired()])
     artist = StringField('Artist', validators=[InputRequired()])
 
     date = DateField("Date of Event", validators=[Optional()])
     time = TimeField("Time of Event", validators=[Optional()])
 
     # dateTime = DateTimeField('Date and Time (dd-mm-yyyy h:m:s)', format='%d-%m-%Y %H:%M:%S')
-    status = RadioField('Event Status', choices = ['OPEN', 'UNPUBLISHED', 'SOLD-OUT', 'CANCELLED'])
+    status = RadioField('Event Status', choices = ['OPEN', 'UNPUBLISHED', 'SOLD_OUT', 'CANCELLED'])
     tickets = IntegerField('Available Tickets', validators=[InputRequired()])
-    price = DecimalField('Price per Ticket 00.00', validators=[InputRequired()], places=2)
+    price = DecimalField('Price per Ticket', validators=[InputRequired()], places=2)
 
     submit = SubmitField("Create")
     image = FileField("Upload Event Image", validators=[
