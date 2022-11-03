@@ -59,7 +59,7 @@ def myconcerts():
 
 
 @bp.route('/createevent', methods=['GET', 'POST'])
-# @login_required --- left for now while creating page so easy to view
+@login_required
 def createevent():
     form = CreateEventForm()
 

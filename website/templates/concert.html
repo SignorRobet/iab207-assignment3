@@ -91,12 +91,12 @@
 
                         <!-- Book Tickets Button -->
                         {% if concert.status.name == 'OPEN' %}
-                        <button type="button" class="btn btn-primary btn-green" data-bs-toggle="modal"
+                        <button type="button" class="btn btn-primary generalButtons" data-bs-toggle="modal"
                             data-bs-target="#ticketModal">
                             Book Tickets
                         </button>
                         {% else %}
-                        <button type="button" class="btn btn-primary btn-green" disabled>
+                        <button type="button" class="btn btn-primary generalButtons" disabled>
                             {% if concert.status.name == 'UNPUBLISHED' %}
                             Tickets unavailable
                             {% elif concert.status.name == 'CANCELLED' %}
@@ -109,7 +109,7 @@
 
                         <!-- TODO link to edit concert page -->
                         {% if concert.user.id == current_user.id %}
-                        <a href="{{url_for('main.concert', id=concert.id)}}" class="btn btn-danger ms-2">
+                        <a href="{{url_for('main.concert', id=concert.id)}}" class="btn btn-primary generalButtons ms-2">
                             Edit Event
                         </a>
                         {% endif %}
