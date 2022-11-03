@@ -66,7 +66,7 @@ class BookingForm(FlaskForm):
     - booking_time
     - price
     '''
-    quantity = IntegerField("Quantity", validators=[
+    quantity = IntegerField("Ticket Quantity", validators=[
         InputRequired(),
         NumberRange(min=1, message="Ticket Quantity must be greater than 0")
     ])
@@ -100,7 +100,7 @@ class CreateEventForm(FlaskForm):
     time = TimeField("Time of Event", validators=[Optional()])
 
     # dateTime = DateTimeField('Date and Time (dd-mm-yyyy h:m:s)', format='%d-%m-%Y %H:%M:%S')
-    status = RadioField('Event Status', choices=['OPEN', 'UNPUBLISHED', 'SOLD_OUT', 'CANCELLED'])
+    status = RadioField('Event Status', choices=['OPEN', 'UNPUBLISHED', 'SOLD_OUT', 'CANCELLED'], default='OPEN')
     tickets = IntegerField('Available Tickets', validators=[InputRequired()])
     price = DecimalField('Price per Ticket', validators=[InputRequired()], places=2)
 

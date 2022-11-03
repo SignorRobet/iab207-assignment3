@@ -101,11 +101,12 @@ def concert(id):
         # check if enough tickets are available, if not, don't add to db
         tickets_left = concert.capacity - concert.tickets_booked
         if (booking.quantity > tickets_left):
-            message = "Not enough tickets available, only {0} tickets remaining".format(tickets_left)
+            message = """Booking Failed: Not enough tickets available.
+            Only {0} tickets remaining""".format(tickets_left)
         else:
             # add booking to db and update concert tickets booked / status if relevant
             concert.tickets_booked = concert.tickets_booked + booking.quantity  # += is apparently bad practice
-            if (concert.tickets_booked >= concert.total_capacity):
+            if (concert.tickets_booked >= concert.capacity):
                 concert.status = "SOLD_OUT"
             db.session.add(booking)
             db.session.commit()

@@ -339,7 +339,6 @@ input[type=submit]{
     border-radius: 25px;
     padding: 10px;
     margin: 10px;
-    width: 30%;
     transition: 0.3s 0s ease-out;
     border: none;
 }
@@ -359,4 +358,8 @@ Other
 
 .nobullets ul {
     list-style-type: none;
+}
+
+.ctitle-width {
+    width: 150px;
 }

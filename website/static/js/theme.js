@@ -26,3 +26,15 @@ function PreviewImage() {
         };
     };
 };
+
+function calculateSubtotal(ticketQuantity, ticketPrice) {
+    const quantityValue = parseInt(ticketQuantity);
+    const priceValue = parseFloat(ticketPrice);
+
+    if (!Number.isNaN(quantityValue) && !Number.isNaN(priceValue) && quantityValue >= 0) {
+        return '$' + (quantityValue * priceValue).toFixed(2);
+    }
+    else {
+        return '$' + 0 + '.00';
+    }
+};

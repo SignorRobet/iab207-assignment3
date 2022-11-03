@@ -15,12 +15,28 @@ https://getbootstrap.com/docs/5.2/layout/breakpoints/
     .nav-button {
         width: 100%;
     }
+
+    .banner h1 {
+        font-size: 2rem;
+    }
+    
+    .banner h2 {
+        font-size: 1rem;
+    }
 }
 
 /* Small Device */
 @media (max-width: 767.98px) {
     .nav-button {
         width: 12vw;
+    }
+
+    .banner h1 {
+        font-size: 3rem;
+    }
+    
+    .banner h2 {
+        font-size: 2rem;
     }
 }
 
