@@ -309,6 +309,12 @@ Booking History
 .img-tablecell {
     width: -moz-fit-content;
     width: fit-content;
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+}
+=======
+>>>>>>> Alex_index6
 }
 
 /****************************************
@@ -365,4 +371,15 @@ Other
 
 .nobullets ul {
     list-style-type: none;
+<<<<<<< HEAD
 }
+=======
+}
+
+.indexcards {
+    
+    margin-left: 3%;
+    margin-right: 3%;
+}
+>>>>>>> Stashed changes
+>>>>>>> Alex_index6

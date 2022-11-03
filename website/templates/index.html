@@ -68,14 +68,24 @@
                 </div>
             </div>
                 <!-- First Row of Events -->
-            <div class="card-group" style="padding-left:4%; padding-right:4%;">
+            <div class="card-group indexcardgroup">
                 {% for event in events|reverse %}
+<<<<<<< HEAD
                 {% if event.status.name != 'UNPUBLISHED' %}
+=======
+<<<<<<< Updated upstream
+>>>>>>> Alex_index6
                 <div class="col-md-4 col-sm-6" style="padding: 1%">
                         <div class="card">
+=======
+                {% if event.status.name != 'UNPUBLISHED' %}
+                <div class="col-md-4 col-sm-6 mr-1">
+                        <div class="card indexcards">
+>>>>>>> Stashed changes
                             <img class="card-img-top" src={{event.image}} alt="event picture">
                             <div class="card-body">
                                 <h5 class="card-title">{{event.title}}</h5>
+                                <h5 class="card-title"> {{event.status.value}}</h5>
                                 <p class="card-text">{{event.description}}</p>
                             </div>
                             <div class="card-footer"><a href = "{{url_for('main.concert', id=event.id)}}" class ="btn btn-danger"> View Details </a></div>
