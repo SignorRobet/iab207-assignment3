@@ -1,11 +1,12 @@
-from dataclasses import dataclass
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import (
+    Blueprint, render_template, request, redirect, url_for, flash
+)
 from flask_login import login_required, current_user
 
 from datetime import datetime
 
 from .models import Event, Booking, Comment
-from .forms import BookingForm, CommentForm, CreateEventForm, LoginForm
+from .forms import BookingForm, CommentForm, CreateEventForm
 from . import db
 from .functions import check_upload_file
 
@@ -67,7 +68,8 @@ def createevent():
             image=check_upload_file(form.image.data, 'events'),
             description=form.info.data,
             venue=form.venue.data,
-            time=form.dateTime.data,
+            date=form.date.data,
+            time=form.time.data,
             capacity=form.tickets.data,
             ticket_price=form.price.data,
             user_id=current_user.id)
@@ -96,8 +98,20 @@ def concert(id):
                           price=(concert.ticket_price * booking_form.quantity.data),
                           time=datetime.now())
 
-        db.session.add(booking)
-        db.session.commit()
+        # check if enough tickets are available, if not, don't add to db
+        tickets_left = concert.capacity - concert.tickets_booked
+        if (booking.quantity > tickets_left):
+            message = "Not enough tickets available, only {0} tickets remaining".format(tickets_left)
+        else:
+            # add booking to db and update concert tickets booked / status if relevant
+            concert.tickets_booked = concert.tickets_booked + booking.quantity  # += is apparently bad practice
+            if (concert.tickets_booked >= concert.total_capacity):
+                concert.status = "SOLD_OUT"
+            db.session.add(booking)
+            db.session.commit()
+            message = "Successfully booked tickets"
+
+        flash(message)
         return redirect(url_for('main.concert', id=id))
 
     if (comment_form.comment_submit.data and comment_form.validate()):
@@ -106,8 +120,7 @@ def concert(id):
         comment = Comment(user_id=current_user.id,
                           event_id=concert.id,
                           text=comment_form.text.data,
-                          time=datetime.now()
-                          )
+                          time=datetime.now())
 
         db.session.add(comment)
         db.session.commit()
