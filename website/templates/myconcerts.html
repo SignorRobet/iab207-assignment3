@@ -103,9 +103,9 @@
                                 <td> {{hosted.venue}} </td>
                                 <td> {{hosted.time}} </td>
                                 <td class="text-center">
-                                    <a href="concertDetails.html" class="btn btn-primary btn-green">
-                                        View Event
-                                    </a>
+
+                                    <a href="{{url_for('main.concert', id=hosted.id)}}"
+                                    class="btn btn-primary btn-green"> Viewwww Event </a>
                                     <a href="concertDetails.html" class="btn btn-primary btn-green">
                                         Edit Event
                                     </a>
