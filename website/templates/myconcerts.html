@@ -95,7 +95,7 @@
                         <tbody>
                             <tr>
                                 <!-- Hosted Events -->
-                                {% for hosted in disp_events %}
+                                {% for hosted in current_user.events %}
                                 
                                 <th scope="row">{{hosted.id}}</th>
                                 <td class="img-tablecell d-table-cell"><img class="img-fluid img-table"
