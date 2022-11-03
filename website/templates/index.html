@@ -28,7 +28,7 @@
                                 <div class="col-lg-8"><input type="text" name="search" class="form-control"
                                         id="SearchForm">
                                 </div>
-                                <div class="col-lg-4"><button type="submit" class="btn btn-primary my-1">Search</button>
+                                <div class="col-lg-4"><button type="submit" class="btn btn-primary my-1 generalButtons">Search</button>
                                 </div>
                             </div>
                         </form>
@@ -54,7 +54,7 @@
                                 <option value="EDM">EDM</option>
                                 <option value="JAZZ">JAZZ</option>
                             </select>
-                            <button type="submit" class="flex-shrink-1 btn btn-primary my-1">Search</button>
+                            <button type="submit" class="flex-shrink-1 btn btn-primary my-1 generalButtons">Search</button>
                         </form>
                     </div>
                 </div>
@@ -89,7 +89,7 @@
                                 <p class="card-title">Artist: {{event.artist}}</p>
                             </div>
                             <div class="card-footer"><a href="{{url_for('main.concert', id=event.id)}}"
-                                    class="btn btn-danger"> View Details </a></div>
+                                    class="btn generalButtons"> View Details </a></div>
                         </div>
                     </div>
                     {%endif%}
