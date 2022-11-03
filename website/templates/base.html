@@ -129,20 +129,24 @@
         <div class="row mx-0">
             <div class="col mainFooterCSS">
                 <br>
-                <h6 class="footerText">User </h6>
-                <a class="footerText" href="#">Login</a> <br>
-                <a class="footerText" href="#">Register</a> <br>
+                <h6 class="footerTextNoLink">User </h6>
+                {% if current_user.is_authenticated %}
+                <a class="footerText" href="{{url_for('auth.logout')}}">Logout</a> <br>
+                {% else %}
+                <a class="footerText" href="{{url_for('auth.login')}}">Login</a> <br>
+                <a class="footerText" href="{{url_for('auth.register')}}">Register</a> <br>
+                {% endif %}
                 <a class="footerText" href="#">My Account</a> <br>
-                <a class="footerText" href="#">My Bookings</a> <br>
+                <a class="footerText" href="/myconcerts">My Bookings</a> <br>
             </div>
             <div class="col mainFooterCSS">
                 <br>
-                <h6 class="footerText">Events</h6>
-                <a class="footerText" href="#">All Events</a> <br>
+                <h6 class="footerTextNoLink">Events</h6>
+                <a class="footerText" href="/">Search Events</a> <br>
             </div>
             <div class="col mainFooterCSS">
                 <br>
-                <h6 class="footerText">Mosley Entertainment</h6>
+                <h6 class="footerTextNoLink">Mosley Entertainment</h6>
                 <a class="footerText" href="#">About Us</a> <br>
                 <a class="footerText" href="#">Contact Us</a> <br>
                 <a class="footerText" href="#">FAQs</a> <br>
@@ -178,8 +182,8 @@
             <div class="col-md-3">
                 <a class="footerText" href="#">Terms and Conditions</a>
             </div>
-            <div class="col-md-3 footerText">
-                <p> © Mosley Entertainment. All rights reserved</p>
+            <div class="col-md-3">
+                <p class="footerTextNoLink"> © Mosley Entertainment. All rights reserved</p>
             </div>
         </div>
 

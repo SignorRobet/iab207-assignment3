@@ -257,15 +257,21 @@ Footer
 
 .mainFooterCSS {
     background-color: var(--thm-brightviolet);
-    padding: 50px;
+    padding: 30px;
 }
 
 .bottomFooterCSS {
     background-color: var(--thm-raisinblack);
-    padding: 50px;
+    padding: 30px;
 }
 
 .footerText {
+    color: var(--thm-lightgrey);
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.footerTextNoLink {
     color: var(--thm-lightgrey);
     background-color: transparent;
     text-decoration: none;
@@ -287,7 +293,7 @@ Footer
 .sMedia:hover {
     /* height: 40px;
     width: 40px; */
-    color: rgb(50, 50, 50);
+    color: white;
     font-size: 28px;
 }
 
@@ -322,7 +328,7 @@ Create Event
 }
 
 .bookingElements {
-    padding: 10px;
+    padding: 8x;
     margin: 20px;
     width: 100%;
 }
@@ -363,3 +369,9 @@ Other
 .ctitle-width {
     width: 150px;
 }
+
+.indexcards {
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
