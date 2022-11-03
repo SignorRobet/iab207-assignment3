@@ -12,8 +12,8 @@
                 <div class="mt-auto me-auto p-4 mb-0 nav-background">
                     <h2 class="details-h2">
                         Create Event
-               
-                        
+
+
                     </h2>
                 </div>
             </div>
@@ -22,114 +22,110 @@
 </section>
 
 <div class="container d-flex">
-    
- 
-       <!-- The form box -->
-        <div class="mx-auto gap-3 my-10 p-4 bg-body rounded shadow-sm bookingBox">
-            <h1 class="class=border-bottom pb-2 mb-0 heading">Event Details</h1>
-            <br>
+    <!-- The form box -->
+    <div class="mx-auto gap-3 my-10 p-4 bg-body rounded shadow-sm bookingBox">
+        <h1 class="class=border-bottom pb-2 mb-0 heading">Event Details</h1>
+        <br>
 
-            <form method="POST" action="{{url_for('main.createevent')}}" enctype="multipart/form-data">
-                {{form.hidden_tag()}}
+        <form method="POST" action="{{url_for('main.createevent')}}" enctype="multipart/form-data">
+            {{form.hidden_tag()}}
 
-                <!-- First row of form -->
-                <div class="row g-3 d-flex">
-                    <div class="col-lg-4 col-md-6 col-sm-12 ">
-                        <div class="input-group">
-                            <span class="input-group-text bookingInputHeadings">{{form.eventname.label}}</span>
-                            {{form.eventname}}                        
-                        </div>
+            <!-- First row of form -->
+            <div class="row g-3 d-flex">
+                <div class="col-lg-4 col-md-6 col-sm-12 ">
+                    <div class="input-group">
+                        <span class="input-group-text bookingInputHeadings">{{form.eventname.label}}</span>
+                        {{form.eventname}}
                     </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="input-group">
-                            <span class="input-group-text bookingInputHeadings">{{form.artist.label}}</span>
-                            {{form.artist}}                       
-                        </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="input-group">
+                        <span class="input-group-text bookingInputHeadings">{{form.artist.label}}</span>
+                        {{form.artist}}
                     </div>
-                    <div class="col-lg-4 col-md-8 col-sm-12">
-                        <div class="input-group">
-                            <span class="input-group-text bookingInputHeadings">{{form.genre.label}}</span>
-                            {{form.genre}}                       
-                        </div>
+                </div>
+                <div class="col-lg-4 col-md-8 col-sm-12">
+                    <div class="input-group">
+                        <span class="input-group-text bookingInputHeadings">{{form.genre.label}}</span>
+                        {{form.genre}}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Second row of form -->
+            <div class="row g-3 bookingElements">
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-group">
+                        <span class="input-group-text bookingInputHeadings">{{form.date.label}}</span>
+                        {{form.date}}
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group">
+                        <span class="input-group-text bookingInputHeadings">{{form.time.label}}</span>
+                        {{form.time}}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Third row of form -->
+            <div class="row g-3 bookingElements">
+                <div class="col-lg-6 col-md-12">
+                    <div class="input-group">
+                        <span class="input-group-text bookingInputHeadings">{{form.info.label}}</span>
+                        {{form.info(cols="40", rows="4")}}
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="input-group nobullets">
+                        <span class="input-group-text bookingInputHeadings">{{form.status.label}}</span>
+                        {{form.status}}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fourth row of form -->
+            <div class="row g-3 bookingElements">
+                <div class="col-lg-6 col-md-12">
+                    <div class="input-group">
+                        <span class="input-group-text bookingInputHeadings">{{form.venue.label}}</span>
+                        {{form.venue}}
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="input-group text-center">
+                        <span class="input-group-text bookingInputHeadings">{{form.image}}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fith row of form -->
+            <div class="row g-3 bookingElements">
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-group">
+                        <span class="input-group-text bookingInputHeadings" id="basic-addon1">
+                            {{form.tickets.label}}&nbsp#</span>
+                        {{form.tickets}}
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-group">
+                        <span class="input-group-text bookingInputHeadings" id="basic-addon1">
+                            {{form.price.label}}&nbsp$00.00</span>
+                        {{form.price}}
                     </div>
                 </div>
 
-                <!-- Second row of form -->                
-                <div class="row g-3 bookingElements">
-                    <div class="col-md-6 col-sm-12">
-                        <div class="input-group">
-                            <span class="input-group-text bookingInputHeadings">{{form.date.label}}</span>
-                            {{form.date}}                       
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="input-group">
-                            <span class="input-group-text bookingInputHeadings">{{form.time.label}}</span>
-                            {{form.time}}                       
-                        </div>
-                    </div>
-                </div>
+            </div>
 
-                <!-- Third row of form -->                
-                <div class="row g-3 bookingElements">
-                    <div class="col-lg-6 col-md-12">
-                        <div class="input-group">
-                            <span class="input-group-text bookingInputHeadings">{{form.info.label}}</span>
-                           {{form.info(cols="40", rows="4")}}                       
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-12">
-                        <div class="input-group nobullets">
-                            <span class="input-group-text bookingInputHeadings">{{form.status.label}}</span>
-                            {{form.status}}                        
-                        </div>
-                    </div>
-                </div>
-          
-                <!-- Fourth row of form -->
-                <div class="row g-3 bookingElements">
-                    <div class="col-lg-6 col-md-12">
-                        <div class="input-group">
-                            <span class="input-group-text bookingInputHeadings">{{form.venue.label}}</span>
-                            {{form.venue}}                        
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-12">
-                        <div class="input-group text-center">
-                            <span class="input-group-text bookingInputHeadings">{{form.image}}</span>
-                        </div>   
-                    </div>
-                </div>
-
-                <!-- Fith row of form -->
-                <div class="row g-3 bookingElements">
-                    <div class="col-md-6 col-sm-12">
-                        <div class="input-group">
-                            <span class="input-group-text bookingInputHeadings"  id="basic-addon1"> {{form.tickets.label}}&nbsp#</span>
-                            {{form.tickets}}                                    
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-12">
-                        <div class="input-group">
-                            <span class="input-group-text bookingInputHeadings"  id="basic-addon1"> {{form.price.label}}&nbsp$00.00</span>
-                            {{form.price}}                                  
-                        </div>
-                    </div>
-  
-                </div>
-         
-                 <!-- Sixth row of form -->
-                 <div class="row g-3 bookingElements">
-                    </div>                 
-                        <div class="input-group col-md-4">                  
-                        {{form.submit}}
-                        </div>   
-                    </div>
-                </div>
-            </form>
-        </div>
+            <!-- Sixth row of form -->
+            <div class="row g-3 bookingElements">
+            </div>
+            <div class="input-group col-md-4">
+                {{form.submit}}
+            </div>
+        </form>
+    </div>
 </div>
-         
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 
 {% endblock %}
