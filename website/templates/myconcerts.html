@@ -1,10 +1,7 @@
 {% extends "base.html" %}
-{% import "bootstrap/form.html" as wtf %}
-
-
 
 {% block header %}
-<!-- Page Banner // DON'T NEED TO EDIT -->
+<!-- Page Banner -->
 <section class="banner d-flex">
     <div class="container h-100 mt-3 mb-0">
         <div class="row h-100 mb-0">
@@ -14,70 +11,12 @@
         </div>
     </div>
 </section>
-
-<section class="pb-md-3 pt-5">
-    <div class="container">
-        <form>
-            <div class="row">
-                <div class="col-md-5 mt-auto">
-                    <div>
-                        <h1>My Hosted Events</h1>
-                        <!-- HAVE REMOVED FILTER SEARCH FOR MY EVENTS AND BOOKED 
-                            <label class="filter-label" for="search">Artist or Venue:</label>
-                            <input id="Search" type="text" class="form-control" title="Search
-                                placeholder=" Search by Artist or Venue" />
-
-                            <label class="filter-label" for="genre-select">Genre:</label>
-                            <select class="form-select" title="Genre Select" id="genre-select">
-                                <option selected value="all">--All Genres--</option>
-                                <option value="country">Country</option>
-                                <option value="electronic">Electronic</option>
-                                <option value="metal">Metal</option>
-                                <option value="rock">Rock</option>
-                            </select>-->
-                    </div>
-                </div>
-
-                <!--<div class="col-md-5 mt-auto">
-                        <div>
-                            <label class="filter-label" for="status-select">Status:</label>
-                            <select class="form-select" title="Status Select" id="status-select">
-                                <option selected value="all">--All Statuses--</option>
-                                <option value="upcoming">Upcoming</option>
-                                <option value="inactive">Inactive</option>
-                                <option value="booked">Booked</option>
-                                <option value="cancelled">Cancelled</option>
-                            </select>
-
-                            <label class="filter-label" for="datePicker">Date: </label>
-                            <input id="datePicker" type="date" class="form-control" title="Date Picker" />
-                        </div>
-                    </div> 
-
-                    <div class="col-auto mt-auto ms-auto">
-                        <div class="d-grid mx-auto py-3 py-md-0 mb-md-4">
-                            <button class="btn btn-danger btn-red" type="reset">
-                                Reset Filters
-                            </button>
-                        </div>
-                        <div class="d-grid mx-auto">
-                            <button class="btn btn-primary btn-green" type="submit">
-                                Apply Filters
-                            </button>
-                        </div>
-                    </div>-->
-            </div>
-        </form>
-    </div>
-</section>
 {% endblock %}
 
-
-
-<!-- Index Table -->
 {% block content %}
-<section class="pt-3">
+<section class="pt-5">
     <div class="container">
+        <h1>My Hosted Events</h1>
         <div class="row">
             <div class="col-12">
                 <div class="table-responsive-md">
@@ -86,9 +25,9 @@
                             <tr>
                                 <th class="" scope="col">Concert ID</th>
                                 <th scope="col"></th>
-                                <th scope="col">Concert Title</th>
-                                <th class="d-none d-sm-table-cell" scope="col">Venue</th>
-                                <th scope="col">Booking Date</th>
+                                <th scope="col">Concert</th>
+                                <th class="d-none d-sm-table-cell" scope="col">Status</th>
+                                <th scope="col">Concert Date</th>
                                 <th class="text-center" scope="col">Details</th>
                             </tr>
                         </thead>
@@ -97,22 +36,26 @@
                             {% for hosted in current_user.events %}
                             <tr>
                                 <th scope="row">{{hosted.id}}</th>
+                                {% if hosted.image is none %}
+                                <td class="img-tablecell d-table-cell"><img class="img-fluid img-table"
+                                        src="/static/img/default_event.jpg" alt="Concert Image"></td>
+                                {% else %}
                                 <td class="img-tablecell d-table-cell"><img class="img-fluid img-table"
                                         src={{hosted.image}} alt="Concert Image"></td>
+                                {% endif %}
                                 <td class="d-none d-sm-table-cell">{{hosted.title}}</td>
-                                <td> {{hosted.venue}} </td>
-                                <td> {{hosted.time}} </td>
+                                <td> {{hosted.status.value}} </td>
+                                <td>{{hosted.time}} | {{hosted.date}}</td>
                                 <td class="text-center">
-
-                                    <a href="concertDetails.html" class="btn btn-primary generalButtons">
+                                    <a href="{{url_for('main.concert', id=hosted.id)}}"
+                                        class="btn btn-primary btn-green">
                                         View Event
                                     </a>
-                                    <a href="concertDetails.html" class="btn btn-primary generalButtons">
-
+                                    <a href="{{url_for('main.editevent', id=hosted.id)}}"
+                                        class="btn btn-primary btn-green">
                                         Edit Event
                                     </a>
                                 </td>
-
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -123,33 +66,9 @@
     </div>
 </section>
 
-
-<section class="pb-md-3 pt-5">
-    <div class="container">
-        <form>
-            <div class="row">
-                <div class="col-md-5 mt-auto">
-                    <div>
-                        <h1>My Booked Events</h1>
-
-                    </div>
-                </div>
-
-                <div class="col-md-5 mt-auto">
-
-                </div>
-
-
-            </div>
-        </form>
-    </div>
-</section>
-
-
-<!-- Index Table -->
-
 <section class="pt-3">
     <div class="container">
+        <h1>My Booked Events</h1>
         <div class="row">
             <div class="col-12">
                 <div class="table-responsive-md">
@@ -158,24 +77,30 @@
                             <tr>
                                 <th class="" scope="col">Order ID</th>
                                 <th scope="col"></th>
-                                <th scope="col">Headline Artist</th>
+                                <th scope="col">Concert</th>
                                 <th class="d-none d-sm-table-cell" scope="col">Venue</th>
                                 <th scope="col">Booking Date</th>
                                 <th class="text-center" scope="col">Details</th>
                             </tr>
                         </thead>
                         <tbody>
-
+                            <!-- Booked Events -->
                             {% for booking in current_user.bookings %}
                             <tr>
                                 <th scope="row">{{booking.id}}</th>
+                                {% if booking.event.image is none %}
+                                <td class="img-tablecell d-table-cell"><img class="img-fluid img-table"
+                                        src="/static/img/default_event.jpg" alt="Concert Image"></td>
+                                {% else %}
                                 <td class="img-tablecell d-table-cell"><img class="img-fluid img-table"
                                         src={{booking.event.image}} alt="Concert Image"></td>
+                                {% endif %}
                                 <td>{{booking.event.title}}</td>
                                 <td class="d-none d-sm-table-cell">{{booking.event.venue}}</td>
                                 <td> {{booking.event.time}} </td>
                                 <td class="text-center">
-                                    <a href="concertDetails.html" class="btn btn-primary btn-green">
+                                    <a href="{{url_for('main.concert', id=booking.event.id)}}"
+                                        class="btn btn-primary btn-green">
                                         View Details
                                     </a>
                                 </td>
