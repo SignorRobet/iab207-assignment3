@@ -75,7 +75,11 @@
                     {% if event.status.name != 'UNPUBLISHED' %}
                     <div class="col-md-4 col-sm-6 mr-1">
                         <div class="card indexcards">
+                            {% if event.image is none %}
+                            <img class="card-img-top" src="/static/img/default_event.jpg" alt="event picture">
+                            {% else %}
                             <img class="card-img-top" src={{event.image}} alt="event picture">
+                            {% endif %}
                             <div class="card-body">
                                 <h5 class="card-title">{{event.title}}</h5>
                                 <h5 class="card-title"> {{event.status.value}}</h5>
