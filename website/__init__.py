@@ -21,7 +21,7 @@ def create_app():
     app.debug = True
     app.secret_key = 'utroutoru'
 
-    # for file uploads 
+    # for file uploads
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
     # set TRACK_MODIFICATIONS to false to suppress start up warning
@@ -65,15 +65,14 @@ def create_app():
     from . import auth
     app.register_blueprint(auth.bp)
 
-    @app.errorhandler(404) 
-    # inbuilt function which takes error as parameter 
-    def not_found(e): 
-        return render_template("404.html")
+    @app.errorhandler(404)
+    # inbuilt function which takes error as parameter
+    def error_404(e):
+        return render_template("404.html", error=e, title="404 Error")
 
-    @app.errorhandler(500) 
-    # inbuilt function which takes error as parameter 
-    def not_found(e): 
-        return render_template("500.html")
+    @app.errorhandler(500)
+    # inbuilt function which takes error as parameter
+    def error_500(e):
+        return render_template("500.html", error=e, title="500 Error")
+
     return app
-
-
