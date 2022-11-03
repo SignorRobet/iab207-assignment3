@@ -44,7 +44,7 @@ def genre():
         if (dest == 'all'):
             events = Event.query.all()
         else:
-            events = Event.query.filter(Event.genre.like(dest)).all()
+            events = Event.query.filter(Event.genre == dest).all()
         return render_template('index.html', events=events)
     else:
         return redirect(url_for('main.index'))
@@ -54,7 +54,7 @@ def genre():
 @login_required
 def myconcerts():
     disp_bookings = Booking.query.all()
-    disp_events = Event.query.all() 
+    disp_events = Event.query.all()
     return render_template('myconcerts.html', title='My Concerts', disp_events=disp_events, disp_bookings=disp_bookings)
 
 

@@ -4,25 +4,25 @@
 
 
 {% block header %}
-     <!-- Page Banner // DON'T NEED TO EDIT -->
-     <section class="banner d-flex">
-        <div class="container h-100 mt-3 mb-0">
-            <div class="row h-100 mb-0">
-                <div class="col-12 d-flex flex-column mb-0">
-                    <h2 class="mt-auto me-auto p-4 mb-0 nav-background">My Events</h2>
-                </div>
+<!-- Page Banner // DON'T NEED TO EDIT -->
+<section class="banner d-flex">
+    <div class="container h-100 mt-3 mb-0">
+        <div class="row h-100 mb-0">
+            <div class="col-12 d-flex flex-column mb-0">
+                <h2 class="mt-auto me-auto p-4 mb-0 nav-background">My Events</h2>
             </div>
         </div>
-    </section>
-   
-    <section class="pb-md-3 pt-5">
-        <div class="container">
-            <form>
-                <div class="row">
-                    <div class="col-md-5 mt-auto">
-                        <div>
-                            <h1>My Hosted Events</h1>
-                            <!-- HAVE REMOVED FILTER SEARCH FOR MY EVENTS AND BOOKED 
+    </div>
+</section>
+
+<section class="pb-md-3 pt-5">
+    <div class="container">
+        <form>
+            <div class="row">
+                <div class="col-md-5 mt-auto">
+                    <div>
+                        <h1>My Hosted Events</h1>
+                        <!-- HAVE REMOVED FILTER SEARCH FOR MY EVENTS AND BOOKED 
                             <label class="filter-label" for="search">Artist or Venue:</label>
                             <input id="Search" type="text" class="form-control" title="Search
                                 placeholder=" Search by Artist or Venue" />
@@ -34,11 +34,11 @@
                                 <option value="electronic">Electronic</option>
                                 <option value="metal">Metal</option>
                                 <option value="rock">Rock</option>
-                            </select>--> 
-                        </div>
+                            </select>-->
                     </div>
+                </div>
 
-                    <!--<div class="col-md-5 mt-auto">
+                <!--<div class="col-md-5 mt-auto">
                         <div>
                             <label class="filter-label" for="status-select">Status:</label>
                             <select class="form-select" title="Status Select" id="status-select">
@@ -66,17 +66,17 @@
                             </button>
                         </div>
                     </div>-->
-                </div>
-            </form>
-        </div>
-    </section>
+            </div>
+        </form>
+    </div>
+</section>
 {% endblock %}
 
 
 
-   <!-- Index Table -->
+<!-- Index Table -->
 {% block content %}
-   <section class="pt-3">
+<section class="pt-3">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -84,34 +84,35 @@
                     <table class="table table-striped align-middle">
                         <thead class="table-dark">
                             <tr>
-                                <th class="" scope="col">Event ID</th>
+                                <th class="" scope="col">Concert ID</th>
                                 <th scope="col"></th>
-                                <th scope="col">Headline Artist</th>
+                                <th scope="col">Concert Title</th>
                                 <th class="d-none d-sm-table-cell" scope="col">Venue</th>
                                 <th scope="col">Booking Date</th>
                                 <th class="text-center" scope="col">Details</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <!-- Hosted Events -->
+                            {% for hosted in current_user.events %}
                             <tr>
-                                <!-- Hosted Events -->
-                                {% for hosted in current_user.events %}
-                                
                                 <th scope="row">{{hosted.id}}</th>
                                 <td class="img-tablecell d-table-cell"><img class="img-fluid img-table"
                                         src={{hosted.image}} alt="Concert Image"></td>
-                                <td>{{hosted.img}}</td>
                                 <td class="d-none d-sm-table-cell">{{hosted.title}}</td>
                                 <td> {{hosted.venue}} </td>
                                 <td> {{hosted.time}} </td>
                                 <td class="text-center">
                                     <a href="concertDetails.html" class="btn btn-primary btn-green">
+                                        View Event
+                                    </a>
+                                    <a href="concertDetails.html" class="btn btn-primary btn-green">
                                         Edit Event
                                     </a>
                                 </td>
-                                {% endfor %}
+
                             </tr>
-                           
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
@@ -128,15 +129,15 @@
                 <div class="col-md-5 mt-auto">
                     <div>
                         <h1>My Booked Events</h1>
-                        
+
                     </div>
                 </div>
 
                 <div class="col-md-5 mt-auto">
-                    
+
                 </div>
 
-                
+
             </div>
         </form>
     </div>
@@ -146,45 +147,44 @@
 <!-- Index Table -->
 
 <section class="pt-3">
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <div class="table-responsive-md">
-                <table class="table table-striped align-middle">
-                    <thead class="table-dark">
-                        <tr>
-                            <th class="" scope="col">Order ID</th>
-                            <th scope="col"></th>
-                            <th scope="col">Headline Artist</th>
-                            <th class="d-none d-sm-table-cell" scope="col">Venue</th>
-                            <th scope="col">Booking Date</th>
-                            <th class="text-center" scope="col">Details</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                       
-                        <tr>
-                            
-                            {% for event in current_user.bookings %}
-                            <th scope="row">{{event.id}}</th>
-                            <td class="img-tablecell d-table-cell"><img class="img-fluid img-table"
-                                    src= {{event.image}} alt="Concert Image"></td>
-                            <td>{{event.title}}</td>
-                            <td class="d-none d-sm-table-cell">{{event.venue}}</td>
-                            <td> {{event.time}} </td>
-                            <td class="text-center">
-                                <a href="concertDetails.html" class="btn btn-primary btn-green">
-                                    View Details
-                                </a>
-                            </td>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive-md">
+                    <table class="table table-striped align-middle">
+                        <thead class="table-dark">
+                            <tr>
+                                <th class="" scope="col">Order ID</th>
+                                <th scope="col"></th>
+                                <th scope="col">Headline Artist</th>
+                                <th class="d-none d-sm-table-cell" scope="col">Venue</th>
+                                <th scope="col">Booking Date</th>
+                                <th class="text-center" scope="col">Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for booking in current_user.bookings %}
+                            <tr>
+                                <th scope="row">{{booking.id}}</th>
+                                <td class="img-tablecell d-table-cell"><img class="img-fluid img-table"
+                                        src={{booking.event.image}} alt="Concert Image"></td>
+                                <td>{{booking.event.title}}</td>
+                                <td class="d-none d-sm-table-cell">{{booking.event.venue}}</td>
+                                <td> {{booking.event.time}} </td>
+                                <td class="text-center">
+                                    <a href="concertDetails.html" class="btn btn-primary btn-green">
+                                        View Details
+                                    </a>
+                                </td>
+                            </tr>
                             {% endfor %}
-                        </tr>
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </section>
 
 {% endblock %}
