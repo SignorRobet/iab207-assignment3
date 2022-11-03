@@ -87,32 +87,40 @@ def createevent():
 @bp.route('/editevent/<id>', methods=['GET', 'POST'])
 @login_required
 def editevent(id):
-    form = EditEventForm()
     concert = Event.query.filter_by(id=id).first()
+    form = EditEventForm()
+
+    if (request.method == 'GET'):
+        form.eventname.data = concert.title
+        form.artist.data = concert.artist
+        form.genre.data = concert.genre.name
+        form.status.data = concert.status.name
+        form.info.data = concert.description
+        form.venue.data = concert.venue
+        form.date.data = concert.date
+        form.time.data = concert.time
+        form.tickets.data = concert.capacity
+        form.price.data = concert.ticket_price
 
     if (form.validate_on_submit() == True):
-        print("Event form has been submitted")
-        event = Event(
-            title=form.eventname.data,
-            artist=form.artist.data,
-            genre=form.genre.data,
-            status=form.status.data,
-            image=check_upload_file(form.image.data, 'events'),
-            description=form.info.data,
-            venue=form.venue.data,
-            date=form.date.data,
-            time=form.time.data,
-            capacity=form.tickets.data,
-            ticket_price=form.price.data,
-            user_id=current_user.id)
+        print("Event Edit form has been submitted")
 
-        db.session.add(event)
+        concert.title = form.eventname.data
+        concert.artist = form.artist.data
+        concert.genre = form.genre.data
+        concert.status = form.status.data
+        concert.image = check_upload_file(form.image.data, 'events')
+        concert.description = form.info.data
+        concert.venue = form.venue.data
+        concert.date = form.date.data
+        concert.time = form.time.data
+        concert.capacity = form.tickets.data
+        concert.ticket_price = form.price.data
+
         db.session.commit()
-        # get all the db stuff connected
-        # more db fields or less form options
-        return redirect(url_for('main.index'))
+        return redirect(url_for('main.myconcerts'))
 
-    return render_template('/eventCreation.html', form=form, title="Edit Concert")
+    return render_template('/eventEdit.html', form=form, title="Edit Concert", concert=concert)
 
 
 @bp.route('/concert/<id>', methods=['GET', 'POST'])
@@ -142,7 +150,7 @@ def concert(id):
                 concert.status = "SOLD_OUT"
             db.session.add(booking)
             db.session.commit()
-            message = "Successfully booked tickets"
+            message = "Successfully booked {0} tickets, Order ID: {1}".format(booking.quantity, booking.id)
 
         flash(message)
         return redirect(url_for('main.concert', id=id))

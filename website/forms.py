@@ -120,7 +120,7 @@ class EditEventForm(FlaskForm):
     tickets = IntegerField('Available Tickets', validators=[InputRequired()])
     price = DecimalField('Price per Ticket', validators=[InputRequired()], places=2)
 
-    submit = SubmitField("Create")
+    submit = SubmitField("Update Concert")
     image = FileField("Upload Event Image", validators=[
         FileAllowed(ALLOWED_IMAGE, message='Only supports png, jpg, JPG, PNG')])
     venue = StringField("Venue", validators=[InputRequired()])

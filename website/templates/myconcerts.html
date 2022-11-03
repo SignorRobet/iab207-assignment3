@@ -1,10 +1,7 @@
 {% extends "base.html" %}
-{% import "bootstrap/form.html" as wtf %}
-
-
 
 {% block header %}
-<!-- Page Banner // DON'T NEED TO EDIT -->
+<!-- Page Banner -->
 <section class="banner d-flex">
     <div class="container h-100 mt-3 mb-0">
         <div class="row h-100 mb-0">
@@ -54,7 +51,7 @@
                                         class="btn btn-primary btn-green">
                                         View Event
                                     </a>
-                                    <a href="{{url_for('main.concert', id=hosted.id)}}"
+                                    <a href="{{url_for('main.editevent', id=hosted.id)}}"
                                         class="btn btn-primary btn-green">
                                         Edit Event
                                     </a>
