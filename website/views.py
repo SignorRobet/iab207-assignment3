@@ -40,8 +40,11 @@ def search():
 def genre():
     if request.args['genre']:
         print(request.args['genre'])
-        dest = "%" + request.args['genre'] + '%'
-        events = Event.query.filter(Event.genre.like(dest)).all()
+        dest = request.args['genre']
+        if (dest == 'all'):
+            events = Event.query.all()
+        else:
+            events = Event.query.filter(Event.genre.like(dest)).all()
         return render_template('index.html', events=events)
     else:
         return redirect(url_for('main.index'))

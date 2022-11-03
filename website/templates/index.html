@@ -18,44 +18,46 @@
 
         <!-- Index Filtering Form -->
         <section class="pb-md-3 pt-5">
-
             <div class="container">
-                <div class="mx-auto">
-                    <h1>Search by title</h1>
-                    <form class="form-inline " action="{{url_for('main.search')}}">
-                        <div class="row">
+                <div class="row">
+                    <div class="col-4">
+                        <h1>Search by title</h1>
+                        <form class="form-inline " action="{{url_for('main.search')}}">
+                            <div class="row">
 
-                            <div class="col-lg-8"><input type="text" name="search" class="form-control" id="SearchForm">
+                                <div class="col-lg-8"><input type="text" name="search" class="form-control"
+                                        id="SearchForm">
+                                </div>
+                                <div class="col-lg-4"><button type="submit" class="btn btn-primary my-1">Search</button>
+                                </div>
                             </div>
-                            <div class="col-lg-4"><button type="submit" class="btn btn-primary my-1">Search</button>
-                            </div>
-                        </div>
-
-                    </form>
+                        </form>
+                    </div>
                 </div>
-
-
             </div>
         </section>
+
         <section class="pb-md-3 pt-5">
             <div class="container">
-                <div class="mx-auto">
-                    <h1>Or Search by Genre</h1>
-                    <form class="form-inline d-flex flex-nowrap" action="{{url_for('main.genre')}}">
-                        <select class="form-select" title="Genre Select" id="genre-select" name="genre">
-                            <option selected value="all">--All Genres--</option>
-                            <option value="ROCK">ROCK</option>
-                            <option value="ALTERNATIVE">ALTERNATIVE</option>
-                            <option value="BLUES">BLUES</option>
-                            <option value="POP">POP</option>
-                            <option value="COUNTRY">COUNTRY</option>
-                            <option value="CLASSICAL">CLASSICAL</option>
-                            <option value="EDM">EDM</option>
-                            <option value="JAZZ">JAZZ</option>
-                        </select>
-                        <button type="submit" class="flex-shrink-1 btn btn-primary my-1">Search</button>
+                <div class="row">
+                    <div class="col-4">
+                        <h1>Or Search by Genre</h1>
+                        <form class="form-inline d-flex flex-nowrap" action="{{url_for('main.genre')}}">
+                            <select class="form-select" title="Genre Select" id="genre-select" name="genre">
+                                <option selected value="all">--All Genres--</option>
+                                <option value="ROCK">ROCK</option>
+                                <option value="ALTERNATIVE">ALTERNATIVE</option>
+                                <option value="BLUES">BLUES</option>
+                                <option value="POP">POP</option>
+                                <option value="COUNTRY">COUNTRY</option>
+                                <option value="CLASSICAL">CLASSICAL</option>
+                                <option value="EDM">EDM</option>
+                                <option value="JAZZ">JAZZ</option>
+                            </select>
+                            <button type="submit" class="flex-shrink-1 btn btn-primary my-1">Search</button>
+                        </form>
+                    </div>
                 </div>
-                </form>
             </div>
         </section>
 
@@ -82,8 +84,9 @@
                             {% endif %}
                             <div class="card-body">
                                 <h5 class="card-title">{{event.title}}</h5>
-                                <h5 class="card-title"> {{event.status.value}}</h5>
-                                <p class="card-text">{{event.description}}</p>
+                                <h5 class="card-title">Status: {{event.status.value}}</h5>
+                                <h5 class="card-title">Genre: {{event.genre.value}}</h5>
+                                <p class="card-title">Artist: {{event.artist}}</p>
                             </div>
                             <div class="card-footer"><a href="{{url_for('main.concert', id=event.id)}}"
                                     class="btn btn-danger"> View Details </a></div>
