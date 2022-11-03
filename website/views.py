@@ -6,7 +6,7 @@ from flask_login import login_required, current_user
 from datetime import datetime
 
 from .models import Event, Booking, Comment
-from .forms import BookingForm, CommentForm, CreateEventForm
+from .forms import BookingForm, CommentForm, CreateEventForm, EditEventForm
 from . import db
 from .functions import check_upload_file
 
@@ -20,18 +20,13 @@ def index():
     return render_template('index.html', title='Home', events=events)
 
 
-@bp.route('/searchresults')
-def searchresults():
-    return render_template('searchresults.html', title='Search Results')
-
-
 @bp.route('/search')
 def search():
     if request.args['search']:
         print(request.args['search'])
         dest = "%" + request.args['search'] + '%'
         events = Event.query.filter(Event.title.like(dest)).all()
-        return render_template('index.html', events=events)
+        return render_template('index.html', events=events, title='Home')
     else:
         return redirect(url_for('main.index'))
 
@@ -45,7 +40,7 @@ def genre():
             events = Event.query.all()
         else:
             events = Event.query.filter(Event.genre == dest).all()
-        return render_template('index.html', events=events)
+        return render_template('index.html', events=events, title='Home')
     else:
         return redirect(url_for('main.index'))
 
@@ -55,11 +50,12 @@ def genre():
 def myconcerts():
     disp_bookings = Booking.query.all()
     disp_events = Event.query.all()
-    return render_template('myconcerts.html', title='My Concerts', disp_events=disp_events, disp_bookings=disp_bookings)
+    return render_template('myconcerts.html', title='My Concerts',
+                           disp_events=disp_events, disp_bookings=disp_bookings)
 
 
 @bp.route('/createevent', methods=['GET', 'POST'])
-# @login_required --- left for now while creating page so easy to view
+@login_required
 def createevent():
     form = CreateEventForm()
 
@@ -86,6 +82,37 @@ def createevent():
         return redirect(url_for('main.index'))
 
     return render_template('/eventCreation.html', form=form, title="Create Concert")
+
+
+@bp.route('/editevent/<id>', methods=['GET', 'POST'])
+@login_required
+def editevent(id):
+    form = EditEventForm()
+    concert = Event.query.filter_by(id=id).first()
+
+    if (form.validate_on_submit() == True):
+        print("Event form has been submitted")
+        event = Event(
+            title=form.eventname.data,
+            artist=form.artist.data,
+            genre=form.genre.data,
+            status=form.status.data,
+            image=check_upload_file(form.image.data, 'events'),
+            description=form.info.data,
+            venue=form.venue.data,
+            date=form.date.data,
+            time=form.time.data,
+            capacity=form.tickets.data,
+            ticket_price=form.price.data,
+            user_id=current_user.id)
+
+        db.session.add(event)
+        db.session.commit()
+        # get all the db stuff connected
+        # more db fields or less form options
+        return redirect(url_for('main.index'))
+
+    return render_template('/eventCreation.html', form=form, title="Edit Concert")
 
 
 @bp.route('/concert/<id>', methods=['GET', 'POST'])

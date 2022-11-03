@@ -89,17 +89,33 @@ class CommentForm(FlaskForm):
 
 
 class CreateEventForm(FlaskForm):
-    # stagename = StringField('Stage Name', validators=[InputRequired()])
     eventname = StringField('Event Name', validators=[InputRequired()])
     genre = SelectField('Genre', choices=['ROCK', 'ALTERNATIVE', 'BLUES', 'POP', 'COUNTRY', 'CLASSICAL', 'EDM', 'JAZZ'])
-    # duration = StringField('Event Duration', validators=[InputRequired()])
     info = TextAreaField('Event Information', widget=TextArea(), validators=[Length(min=10), InputRequired()])
     artist = StringField('Artist', validators=[InputRequired()])
 
     date = DateField("Date of Event", validators=[Optional()])
     time = TimeField("Time of Event", validators=[Optional()])
 
-    # dateTime = DateTimeField('Date and Time (dd-mm-yyyy h:m:s)', format='%d-%m-%Y %H:%M:%S')
+    status = RadioField('Event Status', choices=['OPEN', 'UNPUBLISHED', 'SOLD_OUT', 'CANCELLED'], default='OPEN')
+    tickets = IntegerField('Available Tickets', validators=[InputRequired()])
+    price = DecimalField('Price per Ticket', validators=[InputRequired()], places=2)
+
+    submit = SubmitField("Create")
+    image = FileField("Upload Event Image", validators=[
+        FileAllowed(ALLOWED_IMAGE, message='Only supports png, jpg, JPG, PNG')])
+    venue = StringField("Venue", validators=[InputRequired()])
+
+
+class EditEventForm(FlaskForm):
+    eventname = StringField('Event Name', validators=[InputRequired()])
+    genre = SelectField('Genre', choices=['ROCK', 'ALTERNATIVE', 'BLUES', 'POP', 'COUNTRY', 'CLASSICAL', 'EDM', 'JAZZ'])
+    info = TextAreaField('Event Information', widget=TextArea(), validators=[Length(min=10), InputRequired()])
+    artist = StringField('Artist', validators=[InputRequired()])
+
+    date = DateField("Date of Event", validators=[Optional()])
+    time = TimeField("Time of Event", validators=[Optional()])
+
     status = RadioField('Event Status', choices=['OPEN', 'UNPUBLISHED', 'SOLD_OUT', 'CANCELLED'], default='OPEN')
     tickets = IntegerField('Available Tickets', validators=[InputRequired()])
     price = DecimalField('Price per Ticket', validators=[InputRequired()], places=2)
